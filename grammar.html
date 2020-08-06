@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>oak Grammar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/marx/2.0.4/marx.css">
+    <style>
+      div.main_content { padding-left: 10%; padding-right: 10%; }
+      div.def_block { border: 1px solid; background-color: honeydew; margin-bottom: 12px; }
+      pre { background: none; padding-top: 0px; padding-bottom: 0px; }
+      a.nont { color: rgba(0, 0, 0, 0.8); }
+      a.nl   { color: rgba(0, 0, 0, 0.8); text-decoration: underline; }
+      span.tok { font-weight: bold; color: tomato; opacity: 0.85; }
+      span.opt { vertical-align: sub; font-size:85%; font-style: italic; color: black; opacity: 0.8; }
+      span.optl { border-bottom: dotted; border-bottom-width: thin; }
+    </style>
+  </head>
+
+  <body>
+    <h1 style="text-align: center;">Grammar of oak</h1>
+    <div class="main_content">
+      
+      <h3>Expression</h3>
+      <div class="def_block">
+        <pre>
+<a id="IfElseExpression" class="nont">Expression</a>:
+	IfElseExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="PipelineExpression" class="nont">IfElseExpression</a>:
+	AssignExpression
+	<span class="tok">if</span> Expression <span class="tok">:</span> Expression <span class="tok">else</span> IfElseExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="AssignExpression" class="nont">AssignExpression</a>:
+	PipelineExpression
+	PipelineExpression   <span class="tok">=</span> AssignExpression
+	PipelineExpression  <span class="tok">+=</span> AssignExpression
+	PipelineExpression  <span class="tok">-=</span> AssignExpression
+	PipelineExpression <span class="tok">++=</span> AssignExpression
+	PipelineExpression  <span class="tok">*=</span> AssignExpression
+	PipelineExpression  <span class="tok">/=</span> AssignExpression
+	PipelineExpression  <span class="tok">%=</span> AssignExpression
+	PipelineExpression <span class="tok">^^=</span> AssignExpression
+	PipelineExpression  <span class="tok">&=</span> AssignExpression
+	PipelineExpression  <span class="tok">^=</span> AssignExpression
+	PipelineExpression  <span class="tok">|=</span> AssignExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="PipelineExpression" class="nont">PipelineExpression</a>:
+	AppExpression
+	PipelineExpression <span class="tok">=></span> AppExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="AddExpression" class="nont">AppExpression</a>:
+	OrExpression
+	OrExpression <span class="tok">app</span> AppExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="OrExpression" class="nont">OrExpression</a>:
+	XorExpression
+	OrExpression <span class="tok">||</span> XorExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="XorExpression" class="nont">XorExpression</a>:
+	AndExpression
+	XorExpression <span class="tok">^^</span> AndExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="AndExpression" class="nont">AndExpression</a>:
+	BitOrExpression
+	AndExpression <span class="tok">&&</span> BitOrExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="BitOrExpression" class="nont">BitOrExpression</a>:
+	BitXorExpression
+	BitOrExpression <span class="tok">|</span> BitXorExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="BitXorExpression" class="nont">BitXorExpression</a>:
+	BitAndExpression
+	BitXorExpression <span class="tok">^</span> BitAndExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="BitAndExpression" class="nont">BitAndExpression</a>:
+	CmpExpression
+	BitAndExpression <span class="tok">&</span> CmpExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="CmpExpression" class="nont">CmpExpression</a>:
+	ShiftExpression
+	ShiftExpression   <span class="tok"><</span> ShiftExpression
+	ShiftExpression  <span class="tok"><=</span> ShiftExpression
+	ShiftExpression   <span class="tok">></span> ShiftExpression
+	ShiftExpression  <span class="tok">>=</span> ShiftExpression
+	ShiftExpression  <span class="tok">==</span> ShiftExpression
+	ShiftExpression  <span class="tok">!=</span> ShiftExpression
+	ShiftExpression  <span class="tok">in</span> ShiftExpression
+	ShiftExpression <span class="tok">!in</span> ShiftExpression
+	ShiftExpression  <span class="tok">is</span> ShiftExpression
+	ShiftExpression <span class="tok">!is</span> ShiftExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="ShiftExpression" class="nont">ShiftExpression</a>:
+	AddExpression
+	ShiftExpression  <span class="tok"><<</span> AddExpression
+	ShiftExpression  <span class="tok">>></span> AddExpression
+	ShiftExpression <span class="tok">>>></span> AddExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="AddExpression" class="nont">AddExpression</a>:
+	MulExpression
+	AddExpression  <span class="tok">+</span> MulExpression
+	AddExpression  <span class="tok">-</span> MulExpression
+	AddExpression <span class="tok">++</span> MulExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="MulExpression" class="nont">MulExpression</a>:
+	MulExpression
+	MulExpression <span class="tok">*</span> PowExpression
+	MulExpression <span class="tok">/</span> PowExpression
+	MulExpression <span class="tok">%</span> PowExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="PowExpression" class="nont">PowExpression</a>:
+	ApplyExpression
+	ApplyExpression <span class="tok">**</span> PowExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="ApplyExpression" class="nont">ApplyExpression</a>:
+	UnaryExpression
+	ApplyExpression UnaryExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="UnaryExpression" class="nont">UnaryExpression</a>:
+	IndexingExpression
+	<span class="tok">--</span> UnaryExpression
+	 <span class="tok">~</span> UnaryExpression
+	 <span class="tok">#</span> UnaryExpression
+	 <span class="tok">!</span> UnaryExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="IndexingExpression" class="nont">IndexingExpression</a>:
+	CompositionExpression
+	IndexingExpression <span class="tok">![</span> <a href="#Expressions" class="nl">Expressions</a> <span class="tok">]</span>
+	IndexingExpression <span class="tok">![</span> <a href="#Slicings" class="nl">Slicings</a> <span class="tok">]</span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="CompositionExpression" class="nont">CompositionExpression</a>:
+	AscribeExpression
+	CompositionExpression <span class="tok">@</span> PowExpression</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="AscribeExpression" class="nont">AscribeExpression</a>:
+	DotExpression
+	AscibeExpression <span class="tok">as</span> <a href="#Type" class="nl">Type</a></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="DotExpression" class="nont">DotExpression</a>:
+	PrimaryExpression
+	DotExpression <span class="tok">.</span> identifier
+	DotExpression <span class="tok">.</span> <a href="#TemplateInstance" class="nl">TemplateInstance</a></span>
+	DotExpression <span class="tok">.</span> <a href="#NewExpression" class="nl">NewExpression</a></span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="PrimaryExpression" class="nont">PrimaryExpression</a>:
+	integer
+	real_number
+	string_literal
+	<span class="tok">true</span>
+	<span class="tok">false</span>
+	<span class="tok">null</span>
+	<span class="tok">this</span>
+	<span class="tok">super</span>
+	<span class="tok">$</span>
+	<span class="tok">_.</span><span class="opt">opt</span> identifier
+	<span class="tok">_.</span><span class="opt">opt</span> TemplateInstance
+	<span class="tok">_</span>
+	<a href="#NewExpression" class="nl">NewExpression</a>
+	<a href="#LambdaExpression" class="nl">LambdaExpression</a>
+	<a href="TupleExpression" class="nl">TupleExpression</a>
+	ArrayLiteral
+	AssocArrayLiteral
+	StructLiteral
+	<a href="#BasicType" class="nl">BasicType</a> . identifier
+	<a href="#Typeof" class="nl">Typeof</a> <span class="tok">.</span> identifier
+	<a href="#Typeid" class="nl">Typeid</a>
+	<a href="#Mixin" class="nl">Mixin</a>
+	<span class="tok">mixin</span> <span class="tok">(</span> Expression <span class="tok">)</span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="NewExpression" class="nont">NewExpression</a>:
+	<span class="tok">new</span> Type</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="LambdaExpression" class="nont">LambdaExpression</a>:
+	<span class="tok">\</span> <span class="optl"><span class="tok">:</span> <a href="#Type" class="nl">Type</a> <span class="opt">opt</span></span> <a href="#FunctionArguments" class="nl">FunctionArguments</a><span class="opt">opt</span> <a href="#BlockStatement" class="nl">BlockStatement</a>
+	<span class="tok">\</span> <span class="optl"><span class="tok">:</span> <a href="#Type" class="nl">Type</a> <span class="opt">opt</span></span> <a href="#FunctionArguments" class="nl">FunctionArguments</a><span class="opt">opt</span> <span class="tok">=</span> <a href="#PrimaryExpression" class="nl">PrimaryExpression</a></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="TupleExpression" class="nont">TupleExpression</a>:
+	<span class="tok">(</span> <span class="tok">)</span>
+	<span class="tok">(</span> <a href="#Expressions" class="nl">Expressions</a> <span class="tok">,</span><span class="opt">opt</span> <span class="tok">)</span></pre>
+      </div>
+      <br />
+
+      <h3>Type</h3>
+      <div class="def_block">
+        <pre>
+<a id="Type" class="nont">Type</a>:
+	FunctionType</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="FunctionType" class="nont">FunctionType</a>:
+	PointerType
+	PointerType <span class="tok">-></span> FunctionType</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="PointerType" class="nont">PointerType</a>:
+	PrimaryType
+	<span class="tok">#</span> PointerType</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="PrimaryType" class="nont">PrimaryType</a>:
+	<a href="#BuiltInType" class="nl">BuiltInType</a>
+	<a href="#ArrayType" class="nl">ArrayType</a>
+	<a href="#AssocArrayType" class="nl">AssocArrayType</a>
+	<a href="#SymbolType" class="nl">SymbolType</a>
+	<a href="#TupleType" class="nl">TupleType</a>
+	<a href="#Typeof" class="nl">Typeof</a>
+	<a href="#Mixin" class="nl">Mixin</a>
+	<a href="#StructType" class="nl">StructType</a><!--
+	UnionType
+	ClassType
+	InterfaceType--></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="BuiltInType" class="nont">BuiltInType</a>:
+	<span class="tok">int32</span>
+	<span class="tok">uint32</span>
+	<span class="tok">int64</span>
+	<span class="tok">uint64</span>
+	<span class="tok">real32</span>
+	<span class="tok">real64</span>
+	<span class="tok">bool</span>
+	<span class="tok">unit</span>
+	<span class="tok">string</span>
+	<span class="tok">char</span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="ArrayType" class="nont">ArrayType</a>:
+	<span class="tok">[</span> Type <span class="tok">]</span>
+	
+<a id="AssocArrayType" class="nont">AssocArrayType</a>:
+	<span class="tok">[</span> Type <span class="tok">:</span> Type <span class="tok">]</span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="SymbolType" class="nont">SymbolType</a>:
+	<span class="tok">_.</span><span class="opt">opt</span> identifier
+	<span class="tok">_.</span><span class="opt">opt</span> <a href="#TemplateInstance" class="nont">TemplateInstance</a>
+	SymbolType <span class="tok">.</span> identifier
+	SymbolType <span class="tok">.</span> <a href="#TemplateInstance" class="nont">TemplateInstance</a></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="TupleType" class="nont">TupleType</a>:
+	<span class="tok">(</span> <a href="#Types" class="nl">Types</a> <span class="tok">,</span><span class="opt">opt</span> <span class="tok">)</span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="StructType" class="nont">StructType</a>:
+	<span class="tok">struct {</span> StructBodyList <span class="tok">}</span>
+	
+<a id="StructBodyList" class="nont">StructBodyList</a>:
+	StructBody
+	StructBody StructBodyList
+
+<a id="StructBody" class="nont">StructBody</a>:
+	<a href="#Declaration" class="nont">Declaration</a></pre>
+      </div>
+      <br />
+
+      <h3>Statment</h3>
+      <div class="def_block">
+        <pre>
+<a id="Statment" class="nont">Statment</a>:
+	<a href="#Declaration" class="nont">Declaration</a>
+	<a href="#ExpressionStatement" class="nont">ExpressionStatement</a>
+	<a href="#LabelStatement" class="nont">LabelStatement</a>
+	<a href="#WhileStatement" class="nont">WhileStatement</a>
+	<a href="#DoWhileStatement" class="nont">DoWhileStatement</a>
+	<a href="#ForStatement" class="nont">ForStatement</a>
+	<a href="#ForeachStatement" class="nont">ForaechStatement</a>
+	<a href="#ForeachReverseStatement" class="nont">ForeachReverseStatement</a>
+	<a href="#BreakStatement" class="nont">BreakStatement</a>
+	<a href="#ContinueStatement" class="nont">ContinueStatement</a>
+	<a href="#GotoStatement" class="nont">GotoStatement</a>
+	<a href="#ReturnStatement" class="nont">ReturnStatement</a>
+	<a href="#BlockStatement" class="nont">BlockStatement</a>
+	<a href="#MixinStatement" class="nont">MixinStatement</a></pre>
+      </div>
+      <div class="def_block">
+        <pre>
+<a id="ExpressionStatement" class="nont">ExpressionStatement</a>:
+	<a href="#Expression" class="nl">Expression</a> <span class="tok">;</span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="LabelStatement" class="nont">LabelStatement</a>:
+	identifier <span class="tok">:</span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="WhileStatement" class="nont">WhileStatement</a>:
+	<span class="tok">while</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">:</span> Statement</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="DoWhileStatement" class="nont">DoWhileStatement</a>:
+	<span class="tok">do</span> Statement <span class="tok">while</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">;</span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="ForStatement" class="nont">ForStatement</a>:
+	<span class="tok">for</span> Statement <a href="#Expression" class="nl">Expression</a> <span class="tok">;</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">:</span> Statement</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="ForeachStatement" class="nont">ForeachStatement</a>:
+	<span class="tok">foreach</span>         <span class="optl"><a href="#ForeachArguments" class="nl">ForeachArguments</a> <span class="tok">,</span> <span class="opt">opt</span></span> <span class="tok">;</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">:</span> Statement
+	<span class="tok">foreach</span>         <span class="optl"><a href="#ForeachArgument" class="nl">ForeachArgument</a> <span class="tok">,</span> <span class="opt">opt</span></span>  <span class="tok">;</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">..</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">:</span> Statement
+
+<a id="ForeachReverseStatement" class="nont">ForeachReverseStatement</a>:
+	<span class="tok">foreach_reverse</span> <span class="optl"><a href="#ForeachArguments" class="nl">ForeachArguments</a> <span class="tok">,</span> <span class="opt">opt</span></span> <span class="tok">;</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">:</span> Statement
+	<span class="tok">foreach_reverse</span> <span class="optl"><a href="#ForeachArgument" class="nl">ForeachArgument</a> <span class="tok">,</span> <span class="opt">opt</span></span>  <span class="tok">;</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">..</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">:</span> Statement
+
+<a id="ForeachArguments" class="nont">ForeachArguments</a>:
+	ForeachArgument
+	ForeachArgument <span class="tok">,</span> ForeachArguments
+
+<a id="ForeachArgument" class="nont">ForeachArgument</a>:
+	identifier <span class="optl"><span class="tok">:</span> <a href="#Type" class="nl">Type</a> <span class="opt">opt</span></span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="BreakStatement" class="nont">BreakStatement</a>:
+	<span class="tok">break</span> identifier<span class="opt">opt</span> <span class="tok">;</span></pre>
+      </div>
+      <div class="def_block">
+        <pre>
+<a id="ContinueStatement" class="nont">ContinueStatement</a>:
+	<span class="tok">continue</span> identifier<span class="opt">opt</span> <span class="tok">;</span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="GotoStatement" class="nont">GotoStatement</a>:
+    <span class="tok">goto</span> identifier <span class="tok">;</span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="ReturnStatement" class="nont">ReturnStatement</a>:
+	<span class="tok">return</span> <a href="#Expression" class="nl">Expression</a><span class="opt">opt</span> <span class="tok">;</span></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="BlockStatement" class="nont">BlockStatement</a>:
+	<span class="tok">{</span> StatementList <span class="tok">}</span>
+
+<a id="StatementList" class="nont">StatementList</a>:
+	Statement StatementList
+	Statement</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="MixinStatement" class="nont">MixinStatement</a>:
+	<a href="#Mixin" class="nl">Mixin</a> <span class="tok">;</span></pre>
+      </div>
+      
+      <h3>Declaration</h3>
+      <div class="def_block">
+        <pre>
+<a id="Declaration" class="nont">Declartion</a>:
+	<a href="#LetDeclaration" class="nont">LetDeclaration</a>
+	<a href="#FuncDeclaration" class="nont">FunctionDeclaration</a>
+	<a href="#TypedefDeclaration" class="nont">TypedefDeclaration</a></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="LetDeclaration" class="nont">LetDeclartion</a>:
+	<span class="tok">let</span> LetDeclBodies <span class="tok">,</span><span class="opt">opt</span> <span class="tok">;</span>
+
+<a id="LetDeclBodies" class="nont">LetDeclBodies</a>:
+	LetDeclBody
+	LetDeclBody <span class="tok">,</span> LetDeclBodies
+
+<a id="LetDeclBody" class="nont">LetDeclBody</a>:
+	identifier <span class="tok">:</span> <a href="#Type" class="nont">Type</a>
+	identifier <span class="tok">=</span> <a href="#Expression" class="nont">Expression</a>
+	identifier <span class="tok">:</span> <a href="#Type" class="nont">Type</a> <span class="tok">=</span> <a href="#Expression" class="nont">Expression</a></pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="FuncDeclaration" class="nont">FuncDeclartion</a>:
+	<span class="tok">func</span> identifier <span class="optl"><span class="tok">:</span> <a href="#Type" class="nl">Type</a> <span class="opt">opt</span></span> FunctionArgumentList<span class="opt">opt</span> BlockStatement
+	<span class="tok">func</span> identifier <span class="optl"><span class="tok">:</span> <a href="#Type" class="nl">Type</a> <span class="opt">opt</span></span> FunctionArgumentList<span class="opt">opt</span> <span class="tok">=</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">;</span>
+
+<a id="FunctionArgumentList" class="nont">FunctionArgumentList</a>:
+	FunctionArgument FunctionArgumentList
+	FunctionArgument
+
+<a id="FunctionArgument" class="nont">FunctionArgument</a>:
+	identifier <span class="optl"><span class="tok">:</span> <a href="#Type" class="nl">Type</a> <span class="opt">opt</span></span>
+	<span class="tok">_</span>          <span class="optl"><span class="tok">:</span> <a href="#Type" class="nl">Type</a> <span class="opt">opt</span></span></pre>
+	</div>
+	
+	<div class="def_block">
+        <pre>
+<a id="TypedefDeclaration" class="nont">TypedefDeclaration</a>:
+	<span class="tok">typedef</span> identifier <span class="tok">=</span><span class="opt">opt</span> <a href="#Type" class="nl">Type</a></pre>
+    </div>
+  </body>
+</html>
+
+
