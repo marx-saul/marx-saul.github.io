@@ -20,18 +20,39 @@
     <h1 style="text-align: center;">Grammar of oak</h1>
     <div class="main_content">
       
+      <h3>Module</h3>
+      <div class="def_block">
+        <pre>
+<a id="Module" class="nont">Module</a>:
+	ModuleDeclaration<span class="opt">opt</span> ModuleBodyList<span class="opt">opt</span>
+
+<a id="ModuleDeclaration" class="nont">ModuleDeclaration</a>:
+	<span class="tok">module</span> ModuleIdentifiers <span class="tok">;</span>
+
+<a id="ModuleIdentifiers" class="nont">ModuleIdentifiers</a>:
+	identifier
+	identifier <span class="tok">.</span> ModuleIdentifiers
+
+<a id="ModuleBodyList" class="nont">ModuleBodyList</a>:
+	ModuleBody ModuleBodyList
+	ModuleBody
+
+<a id="ModuleBody" class="nont">ModuleBody</a>:
+	<a href="#Declaration" class="nl">Declaration</a></pre>
+      </div>
+      
       <h3>Expression</h3>
       <div class="def_block">
         <pre>
-<a id="IfElseExpression" class="nont">Expression</a>:
-	IfElseExpression</pre>
+<a id="Expression" class="nont">Expression</a>:
+	WhenElseExpression</pre>
       </div>
       
       <div class="def_block">
         <pre>
-<a id="PipelineExpression" class="nont">IfElseExpression</a>:
+<a id="WhenElseExpression" class="nont">WhenElseExpression</a>:
 	AssignExpression
-	<span class="tok">if</span> Expression <span class="tok">:</span> Expression <span class="tok">else</span> IfElseExpression</pre>
+	<span class="tok">when</span> Expression <span class="tok">:</span> Expression <span class="tok">else</span> WhenElseExpression</pre>
       </div>
       
       <div class="def_block">
@@ -284,11 +305,7 @@
 	<a href="#SymbolType" class="nl">SymbolType</a>
 	<a href="#TupleType" class="nl">TupleType</a>
 	<a href="#Typeof" class="nl">Typeof</a>
-	<a href="#Mixin" class="nl">Mixin</a>
-	<a href="#StructType" class="nl">StructType</a><!--
-	UnionType
-	ClassType
-	InterfaceType--></pre>
+	<a href="#Mixin" class="nl">Mixin</a></pre>
       </div>
       
       <div class="def_block">
@@ -329,40 +346,28 @@
 <a id="TupleType" class="nont">TupleType</a>:
 	<span class="tok">(</span> <a href="#Types" class="nl">Types</a> <span class="tok">,</span><span class="opt">opt</span> <span class="tok">)</span></pre>
       </div>
-      
-      <div class="def_block">
-        <pre>
-<a id="StructType" class="nont">StructType</a>:
-	<span class="tok">struct {</span> StructBodyList <span class="tok">}</span>
-	
-<a id="StructBodyList" class="nont">StructBodyList</a>:
-	StructBody
-	StructBody StructBodyList
-
-<a id="StructBody" class="nont">StructBody</a>:
-	<a href="#Declaration" class="nont">Declaration</a></pre>
-      </div>
       <br />
 
       <h3>Statment</h3>
       <div class="def_block">
         <pre>
 <a id="Statment" class="nont">Statment</a>:
-	<a href="#Declaration" class="nont">Declaration</a>
-	<a href="#ExpressionStatement" class="nont">ExpressionStatement</a>
-	<a href="#LabelStatement" class="nont">LabelStatement</a>
-	<a href="#WhileStatement" class="nont">WhileStatement</a>
-	<a href="#DoWhileStatement" class="nont">DoWhileStatement</a>
-	<a href="#ForStatement" class="nont">ForStatement</a>
-	<a href="#ForeachStatement" class="nont">ForaechStatement</a>
-	<a href="#ForeachReverseStatement" class="nont">ForeachReverseStatement</a>
-	<a href="#BreakStatement" class="nont">BreakStatement</a>
-	<a href="#ContinueStatement" class="nont">ContinueStatement</a>
-	<a href="#GotoStatement" class="nont">GotoStatement</a>
-	<a href="#ReturnStatement" class="nont">ReturnStatement</a>
-	<a href="#BlockStatement" class="nont">BlockStatement</a>
-	<a href="#MixinStatement" class="nont">MixinStatement</a></pre>
+	<a href="#Declaration" class="nl">Declaration</a>
+	<a href="#ExpressionStatement" class="nl">ExpressionStatement</a>
+	<a href="#LabelStatement" class="nl">LabelStatement</a>
+	<a href="#WhileStatement" class="nl">WhileStatement</a>
+	<a href="#DoWhileStatement" class="nl">DoWhileStatement</a>
+	<a href="#ForStatement" class="nl">ForStatement</a>
+	<a href="#ForeachStatement" class="nl">ForaechStatement</a>
+	<a href="#ForeachReverseStatement" class="nl">ForeachReverseStatement</a>
+	<a href="#BreakStatement" class="nl">BreakStatement</a>
+	<a href="#ContinueStatement" class="nl">ContinueStatement</a>
+	<a href="#GotoStatement" class="nl">GotoStatement</a>
+	<a href="#ReturnStatement" class="nl">ReturnStatement</a>
+	<a href="#BlockStatement" class="nl">BlockStatement</a>
+	<a href="#MixinStatement" class="nl">MixinStatement</a></pre>
       </div>
+      
       <div class="def_block">
         <pre>
 <a id="ExpressionStatement" class="nont">ExpressionStatement</a>:
@@ -372,7 +377,16 @@
       <div class="def_block">
         <pre>
 <a id="LabelStatement" class="nont">LabelStatement</a>:
-	identifier <span class="tok">:</span></pre>
+	<span class="tok">*</span> identifier</pre>
+      </div>
+      
+      <div class="def_block">
+        <pre>
+<a id="IfElseStatement" class="nont">IfElseStatement</a>:
+	<span class="tok">if</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">:</span> <a href="#Statement" class="nl">Statement</a>      <span class="tok">else</span> <span class="tok">:</span> <a href="#Statement" class="nl">Statement</a>
+	<span class="tok">if</span> <a href="#Expression" class="nl">Expression</a>   <a href="#BlockStatement" class="nl">BlockStatement</a> <span class="tok">else</span> <span class="tok">:</span> <a href="#Statement" class="nl">Statement</a>
+	<span class="tok">if</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">:</span> <a href="#Statement" class="nl">Statement</a>
+	<span class="tok">if</span> <a href="#Expression" class="nl">Expression</a>   <a href="#BlockStatement" class="nl">BlockStatement</a></pre>
       </div>
       
       <div class="def_block">
@@ -425,7 +439,7 @@
       <div class="def_block">
         <pre>
 <a id="GotoStatement" class="nont">GotoStatement</a>:
-    <span class="tok">goto</span> identifier <span class="tok">;</span></pre>
+	<span class="tok">goto</span> identifier <span class="tok">;</span></pre>
       </div>
       
       <div class="def_block">
@@ -488,6 +502,19 @@
 	identifier <span class="optl"><span class="tok">:</span> <a href="#Type" class="nl">Type</a> <span class="opt">opt</span></span>
 	<span class="tok">_</span>          <span class="optl"><span class="tok">:</span> <a href="#Type" class="nl">Type</a> <span class="opt">opt</span></span></pre>
 	</div>
+	
+	<div class="def_block">
+        <pre>
+<a id="StructDeclaration" class="nont">StructDeclaration</a>:
+	<span class="tok">struct</span> identifier <span class="tok">{</span> StructBodyList <span class="tok">}</span>
+	
+<a id="StructBodyList" class="nont">StructBodyList</a>:
+	StructBody
+	StructBody StructBodyList
+
+<a id="StructBody" class="nont">StructBody</a>:
+	<a href="#Declaration" class="nont">Declaration</a></pre>
+      </div>
 	
 	<div class="def_block">
         <pre>
