@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/marx/2.0.4/marx.css">
     <style>
       div.main_content { padding-left: 10%; padding-right: 10%; }
-      div.def_block { border: 1px solid; background-color: honeydew; margin-bottom: 12px; }
+      div.def_block { border: 1px solid; background-color: aliceblue; margin-bottom: 12px; }
       pre { background: none; padding-top: 0px; padding-bottom: 0px; }
       a.nont { color: rgba(0, 0, 0, 0.8); }
       a.nl   { color: rgba(0, 0, 0, 0.8); text-decoration: underline; }
-      span.tok { font-weight: bold; color: tomato; opacity: 0.85; }
+      span.tok { font-weight: bold; color: crimson; opacity: 0.85; }
       span.opt { vertical-align: sub; font-size:85%; font-style: italic; color: black; opacity: 0.8; }
       span.optl { border-bottom: dotted; border-bottom-width: thin; }
     </style>
@@ -27,11 +27,11 @@
 	ModuleDeclaration<span class="opt">opt</span> ModuleBodyList<span class="opt">opt</span>
 
 <a id="ModuleDeclaration" class="nont">ModuleDeclaration</a>:
-	<span class="tok">module</span> ModuleIdentifiers <span class="tok">;</span>
+	<span class="tok">module</span> ModuleName <span class="tok">;</span>
 
-<a id="ModuleIdentifiers" class="nont">ModuleIdentifiers</a>:
+<a id="ModuleName" class="nont">ModuleName</a>:
 	identifier
-	identifier <span class="tok">.</span> ModuleIdentifiers
+	identifier <span class="tok">.</span> ModuleName
 
 <a id="ModuleBodyList" class="nont">ModuleBodyList</a>:
 	ModuleBody ModuleBodyList
@@ -476,7 +476,7 @@
       <div class="def_block">
         <pre>
 <a id="LetDeclaration" class="nont">LetDeclartion</a>:
-	<span class="tok">let</span> LetDeclBodies <span class="tok">,</span><span class="opt">opt</span> <span class="tok">;</span>
+	<span class="tok">let</span> <a href="#AttributionList" class="nl">AttributionList</a><span class="opt">opt</span> LetDeclBodies <span class="tok">,</span><span class="opt">opt</span> <span class="tok">;</span>
 
 <a id="LetDeclBodies" class="nont">LetDeclBodies</a>:
 	LetDeclBody
@@ -491,7 +491,7 @@
       <div class="def_block">
         <pre>
 <a id="FuncDeclaration" class="nont">FuncDeclartion</a>:
-	<span class="tok">func</span> identifier <span class="optl"><span class="tok">:</span> <a href="#Type" class="nl">Type</a> <span class="opt">opt</span></span> FunctionArgumentList<span class="opt">opt</span> BlockStatement
+	<span class="tok">func</span> <a href="#AttributionList" class="nl">AttributionList</a><span class="opt">opt</span> identifier <span class="optl"><span class="tok">:</span> <a href="#Type" class="nl">Type</a> <span class="opt">opt</span></span> FunctionArgumentList<span class="opt">opt</span> BlockStatement
 	<span class="tok">func</span> identifier <span class="optl"><span class="tok">:</span> <a href="#Type" class="nl">Type</a> <span class="opt">opt</span></span> FunctionArgumentList<span class="opt">opt</span> <span class="tok">=</span> <a href="#Expression" class="nl">Expression</a> <span class="tok">;</span>
 
 <a id="FunctionArgumentList" class="nont">FunctionArgumentList</a>:
@@ -506,20 +506,60 @@
 	<div class="def_block">
         <pre>
 <a id="StructDeclaration" class="nont">StructDeclaration</a>:
-	<span class="tok">struct</span> identifier <span class="tok">{</span> StructBodyList <span class="tok">}</span>
+	<span class="tok">struct</span> <a href="#AttributionList" class="nl">AttributionList</a><span class="opt">opt</span> identifier <span class="tok">{</span> StructBodyList <span class="tok">}</span>
 	
 <a id="StructBodyList" class="nont">StructBodyList</a>:
 	StructBody
 	StructBody StructBodyList
 
 <a id="StructBody" class="nont">StructBody</a>:
-	<a href="#Declaration" class="nont">Declaration</a></pre>
+	<a href="#Declaration" class="nl">Declaration</a></pre>
       </div>
 	
 	<div class="def_block">
         <pre>
 <a id="TypedefDeclaration" class="nont">TypedefDeclaration</a>:
-	<span class="tok">typedef</span> identifier <span class="tok">=</span><span class="opt">opt</span> <a href="#Type" class="nl">Type</a></pre>
+	<span class="tok">typedef</span> <a href="#AttributionList" class="nl">AttributionList</a><span class="opt">opt</span> identifier <span class="tok">=</span><span class="opt">opt</span> <a href="#Type" class="nl">Type</a></pre>
+	</div>
+	
+	<h3>Attribution</h3>
+      <div class="def_block">
+        <pre>
+<a id="AttributionList" class="nont">AttributionList</a>:
+	Attribution
+	Attribution AttributionList</pre>
+      </div>
+      <div class="def_block">
+        <pre>
+<a id="Attribution" class="nont">Attribution</a>:
+	<a href="#ProtectionLevel" class="nl">ProtectionLevel</a>
+	<a href="#Deprecated" class="nl">Deprecated</a>
+	<a href="#Extern" class="nl">Extern</a>
+	<a href="#AtAttribution" class="nl">AtAttribution</a>
+	<span class="tok">immut</span>
+	<span class="tok">const</span>
+	<span class="tok">inout</span>
+	<span class="tok">shared</span>
+	<span class="tok">lazy</span>
+	<span class="tok">ref</span>
+	<span class="tok">return</span>
+	<span class="tok">throwable</span>
+	<span class="tok">pure</span>
+	<span class="tok">final</span>
+	<span class="tok">abstract</span>
+	<span class="tok">override</span>
+	<span class="tok">static</span></pre>
+      </div>
+      <div class="def_block">
+        <pre>
+<a id="ProtectionLevel" class="nont">ProtectionLevel</a>:
+	<span class="tok">private</span>
+	<span class="tok">package</span>
+	<span class="tok">package (</span> <a href="#ModuleName" class="nl">ModuleName</a> <span class="tok">)</span>
+	<span class="tok">public</span>
+	<span class="tok">export</span>
+	<span class="tok">protected</span></pre>
+      </div>
     </div>
   </body>
 </html>
