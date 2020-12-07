@@ -1,0 +1,134 @@
+\documentclass{jsarticle}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+
+\theoremstyle{definition}
+\newtheorem*{definition*}{定義}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{remark}{注}[section]
+\newtheorem{example}{例}[section]
+\renewcommand\proofname{\rm [証明]}
+
+\parindent = 0pt
+
+\begin{document}
+  \section{準備}
+    \subsection{複素平面の位相}
+    \begin{definition*} $\alpha \in \mathbb{C}, \ r \in \mathbb{R}_{>0}$ に対して、開球と閉球をそれぞれ
+    $$U(\alpha; r) = \{z \in \mathbb{C} : |z - \alpha| < r\}, \ \ \ \ D(\alpha; r) = \{z \in \mathbb{C} : |z - \alpha| \leq r\}$$
+    と定義する。$\mathbb{C}$ は $U(\alpha; r)$ という形の部分集合全体が開基となるような位相が入るものとし、$\widehat{\mathbb{C}} = \mathbb{C} \cup \{\infty\}$ をアレキサンドロフの一点コンパクト化とする。すなわち、$\widehat{\mathbb{C}}$ の開集合は $\mathbb{C}$ の開集合であるか、または補集合が $\mathbb{C}$ の有界閉集合であるような部分集合である。
+    \end{definition*}
+  
+    \begin{remark}
+      $\widehat{C}$ は二次元球面 $S^2$ と同相である。
+    \end{remark}
+    \vspace{1ex}
+  
+    \begin{definition*} 位相空間 $X$ の部分集合 $A$ がコンパクトであるとは、$A$ の任意の開被覆に有限部分被覆が存在することである。\\
+    言い換えると、任意の $X$ の開集合からなる族 $\mathfrak{U} = \{U_i\}_{i \in I}$ について、$\displaystyle A \subseteq \bigcup_{i \in I} U_i$ ならば、$i_1, \cdots, i_n \in I$ で $\displaystyle A \subseteq U_{i_1} \cup \cdots \cup U_{i_n}$ となるものが存在することである。
+    \end{definition*}
+    \begin{theorem} \label{Heine_Borel} (Heine-Borel の被覆定理) \\
+        $\mathbb{C}$ の部分集合 $A$ がコンパクトであることと有界閉集合であることは同値。
+    \end{theorem}
+    \begin{proof}
+        略。
+    \end{proof}
+    \vspace{1ex}
+  
+    \begin{definition*} \label{connected} 位相空間 $X$ が連結であるとは、開かつ閉集合が $X$ と $\emptyset$ のみであることをいう。$X$ の部分集合 $A$ が連結であるとは、相対位相を入れたとき連結であることをいう。
+    \end{definition*}
+    \begin{definition*} \label{path_connected} 位相空間 $X$ の部分集合 $A$ が弧状連結であるとは、任意の $x, y \in A$ に対して連続写像 $f : [0, 1] \rightarrow A$ で $f(0) = x, f(1) = y$ となるものが存在することをいう。
+    \end{definition*}
+    \vspace{1ex}
+  
+    \begin{proposition} \label{path_connected_implies_connected}
+        弧状連結ならば連結である。
+    \end{proposition}
+    \begin{proof}
+        $[0, 1]$ は連結であることと、連続写像による連結な集合の像は再び連結であること用いる。
+    \end{proof}
+    \vspace{1ex}
+  
+    \begin{proposition} \label{connected_implies_path_connected}
+        $\mathbb{C}$ の部分集合 $A$ が連結ならば弧状連結である。
+    \end{proposition}
+    \begin{proof}
+        $x \sim y$ を「連続写像 $f : [0, 1] \rightarrow A$ で $f(0) = x, f(1) = y$ となるものが存在する」と定義する。この二項関係は同値関係になることが言える。\\
+        $A \neq \emptyset$ としてよい。連結であることを仮定して、適当な $x \in X$ を取り、
+        $A_0 = \{y \in A : x \neq y\}, A_1 = A - A_0$ とおく。$A_0$ も $A_1$ も開集合であることを示そう。\\
+        $y \in A_0$ とすると $r > 0$ で $U(y; r) \subseteq A$ となるものがある。$z \in U(y; r)$ は $y$ と線分で結ぶことで $y \sim z$ が言える。よって $x \sim y$ とあわせて $x \simeq z$ となって、$z \in A_0.$ したがって、$U(y; r) \subseteq A_0$ で、つまり $A_0$ は開集合。\\
+        $y \in A_1$ とすると $r > 0$ で $U(y; r) \subseteq A$ となるものがある。$z \in U(y; r)$ は $y$ と線分で結ぶことで $y \sim z$ が言える。よって $x \sim z$ と改定すると $x \simeq y$ となって矛盾。したがって、$U(y; r) \subseteq A_1$ で、つまり $A_1$ は開集合。\\
+        $x \in A_0$ だから、$A_0 \neq \emptyset.$ $A$ は連結であるから、$A_0 = A.$
+    \end{proof}
+    \vspace{1ex}
+  
+    \begin{definition*} \label{domain} 領域とは、$\mathbb{C}$ の連結な開部分集合のことである。 \end{definition*}
+    \begin{example} 開球は領域である。 \end{example}
+    \begin{proposition} \label{polylines}
+        $\mathbb{C}$ の領域 $A$ の任意の2点は $A$ 内の折れ線で結ぶことができる。
+    \end{proposition}
+    \begin{proof}
+        まず、$a, b$ を結ぶ曲線 $f : [0, 1] \rightarrow A$ が存在する。$\gamma = f([0, 1])$ は連続写像による像だからコンパクト。よって、$\gamma$ の開被覆 $\{ U(\alpha; r) \subseteq A : \alpha \in \gamma, \, r > 0 \}$ は有限個の部分被覆 $\{ U(\alpha_1; r_1), \cdots U(\alpha_n; r_n) \}$ を持つ。開球の中では任意の2点を線分で結べることから、$f$ が一様連続であることとか、各開集合の逆像たちのなす $[0, 1]$ のルベーグ数とかをいろいろ考えれば折れ線で結べることが言えるよ(後は自分でやってね)。
+    \end{proof}
+    
+    
+    \subsection{一様収束}
+    1.2節では領域 $\Omega$ を固定する。
+    \begin{definition*} \ \\
+        関数列 $f_n : \Omega \rightarrow \mathbb{C}$ が関数 $f : \Omega \rightarrow \mathbb{C}$ に各点収束するとは、任意の $z \in \Omega$ に対して、$\displaystyle \lim_{n\rightarrow\infty} f_n(z) = f(z)$ となること。\\
+        関数列 $f_n : \Omega \rightarrow \mathbb{C}$ が関数 $f : \Omega \rightarrow \mathbb{C}$一様収束するとは、任意の $\epsilon > 0$ に対して、ある $N$ があって、任意の $n > N, \ z \in \Omega$ に対し $|f_n(z) - f(z)| < \varepsilon$ となること。
+    \end{definition*}
+    一様収束するなら各点収束するのは定義より明らかである。
+    \begin{theorem} \ \\
+        各 $f_n$ が連続で、$f$ に一様収束するならば $f$ は連続である。
+    \end{theorem}
+    \begin{proof}
+        $z \in \Omega$ とする。$\varepsilon > 0$ とする。一様収束性より、ある $n$ で、全ての $w \in \Omega$ に対して $|f_n(w) - f(w)| < \varepsilon$ となるものがある。\\
+        $f_n$ は連続だから、$\delta > 0$ で、$|w-z| < \delta \Rightarrow |f_n(w) - f_n(z)| < \varepsilon$ となるものがある。\\
+        $|w-z| < \delta$ のとき、\\
+        $|f(w) - f(z)| \leq |f(w) - f_n(w)| + |f_n(w) - f_n(z)| - |f_n(z) - f(z)| < 3\varepsilon$ だから、連続である。
+    \end{proof}
+    \begin{theorem} \ \\
+        各 $f_n$ が連続であるとする。$\{f_n\}$ がある関数に一様収束すること、コーシーの条件: 任意の $\varepsilon > 0$ に対して、$N$ が存在して、任意の $z \in \Omega, \, n, m > N$ に対し $|f_n(z) - f_m(z)|$ が成立することは同値。
+    \end{theorem}
+    \begin{proof}
+        $f$ に一様収束するとすれば、$\varepsilon > 0$ に対し、$N$ で $z \in \Omega, n > N$ のとき $|f(z) - f_n(z)| < \varepsilon$ となる。$n, m > N$ なら $|f_n(z) - f_m(z)| \leq |f_n(z) - f(z)| + |f(z) - f_m(z)| < 2\varepsilon$ だから、コーシーの条件は満たされている。\\
+        逆に、コーシーの条件を満たすとすると、$z \in \Omega$ を固定したとき、数列 $\{f_n(z)\}_n$ はコーシー列である。したがってある値に収束するので、それを $f(z)$ とおこう。$\varepsilon > 0$ とする。\\
+        $\varepsilon > 0$ としよう。ある $N$ があって、$z \in \Omega, \, n, m > N$ のとき $|f_n(z) - f_m(z)| < \epsilon$ となる。\\
+        $m > N$ とする。$f(z)$ の定義より、ある $M$ があって、$n > M$ なら $|f_n(z) - f(z)| < \varepsilon$ となる。$n > N, M$ を適当に取ると、$|f(z) - f_m(z)| \leq |f(z) - f_n(z)| + |f_n(z) - f_m(z)| < 2\varepsilon.$\\
+        つまり、任意の $\varepsilon > 0$ に対して $N$ が存在して、 $z \in \Omega, \, m > N$ のとき $|f(z) - f_m(z)| < 2\varepsilon$ となる。これは一様収束することを示している。
+    \end{proof}
+    \vspace{1ex}
+    
+    \begin{definition*} 関数列 $f_n : \Omega \rightarrow \mathbb{C}$ が $f : \Omega \rightarrow \mathbb{C}$ に広義一様収束するとは、任意のコンパクト集合 $K \subset \Omega$ 上で $f_n|K$ が $f|K$ に一様収束することをいう。
+    \end{definition*}
+    
+    $\Omega$ の関数列 $\{f_n\}_{n \in \mathbb{N}}$ を、各自然数 $n$ に対して、領域 $\Omega_n$ とその上の関数 $f_n : \Omega_n \rightarrow \mathbb{C}$ で、以下の条件を満たすものとする:
+    \begin{itemize}
+        \item $\Omega = \bigcup_n \Omega_n$
+        \item 任意のコンパクト集合 $K \subseteq \Omega$ に対して $n_0$ があって、$n > n_0 \implies K \subseteq \Omega_n$
+    \end{itemize}
+    このときも広義一様収束の定義を当てはめることができる。以下に述べる定理の仮定をこれに直しても、似た証明ができることに注意する。
+    
+    \begin{theorem} \ \\
+        連続な関数列 $f_n$ が $f$ に、連続な関数列 $g_n$ が $g$ にそれぞれ広義一様収束するとして、$h$ を $\Omega$ 上の連続な関数とする。このとき、$f_n \pm g_n$ は $f \pm g$ に、$f_ng_n$ は $fg$ に、$hf_n$ は $hf$ に広義一様収束する。
+    \end{theorem}
+    \begin{proof}
+        最後だけ証明する。$K \subseteq \Omega$ をコンパクト集合とする。$\epsilon > 0$ として、$|h(z)|$ の $K$ での最大値を $M$ としよう。$M = 0$ のときは証明することはない。\\
+        $M > 0$ のとき、仮定より $N$ があって、$z\in\Omega, \, n > N$ なら $|f_n(z) - f(z)| < \varepsilon/M$ となる。このとき、$|h(z)f_n(z) - h(z)f(z)| < M \varepsilon/M = \varepsilon$ なので、$K$ 上で一様収束する。
+    \end{proof}
+    
+    \begin{definition*} \ \\
+    $\displaystyle \sum_{n=1}^{\infty} f_n(z)$ が $f(z)$ に一様収束するとは、部分和 $s_N(z) = \displaystyle \sum_{n=1}^{N} f_n(z)$ が $f(z)$ に一様収束することをいう。
+    \end{definition*}
+  
+  \section{参考文献}
+    \begin{enumerate}[\textrm{[}1\textrm{]}]
+        \item L. V. Ahlfors: 複素解析 2008年
+    \end{enumerate}
+
+\end{document}

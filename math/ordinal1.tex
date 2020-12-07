@@ -1,0 +1,356 @@
+\documentclass{jsarticle}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+
+\theoremstyle{definition}
+\newtheorem*{axiom*}{公理}
+\newtheorem*{definition*}{定義}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{remark}{注}[section]
+\newtheorem*{remark*}{注}
+\newtheorem{example}{例}[section]
+\renewcommand\proofname{\rm [証明]}
+
+\parindent = 0pt
+
+\begin{document}
+    \section{整列順序}
+    \begin{definition*} \label{well_founded_order}
+        $\langle X, < \rangle$ が整列順序(well-founded order)であるとは、
+        \begin{enumerate}[(i)]
+            \item $\lnot x < x$
+            \item $x < y \land y < z \rightarrow x < z$
+            \item $x < y \lor x = y \lor y < x$
+            \item $A \subseteq X$ が空でないなら $A$ の最小元が存在する
+        \end{enumerate}
+        を満たすことをいう。
+    \end{definition*}
+    
+    \begin{definition*}
+        $\langle X, < \rangle$ が整列順序であるとき、$x \in X$ に対して $\operatorname{pred}(X, x) = \{a \in X : a < x\}$ とする。$<$ をこの上に制限した整列順序で整列づけされるものとする。
+    \end{definition*}
+
+    \begin{definition*}
+        $\langle X, < \rangle, \, \langle Y, <' \rangle$ が整列順序であるとき、$f : X \rightarrow Y$ が順序を保つ写像であるとは、$x < x' \rightarrow f(x) < f(x')$ が成り立つことをいう。順序同型写像とは、順序を保つ全単射のことをいう。$\langle X, < \rangle, \, \langle Y, <' \rangle$ の間に順序同型写像が存在するとき、順序同型といい、$X \simeq Y$ と表す。
+    \end{definition*}
+
+    \begin{theorem} \label{pred_not_isomorphic}
+        $\langle X, < \rangle$ を整列順序として、$x \in X$ とする。$\operatorname{pred}(X, x) \not\simeq X.$
+    \end{theorem}
+    \begin{proof}
+        $f : X \rightarrow \operatorname{pred}(X, x)$ が順序同型であるとする。帰納法で $a \in X \rightarrow a \leq f(a)$ が示せる。実際、$b < a \rightarrow b \leq f(b)$ であるとする。$f(a) < a$ なら、仮定より $f(f(a)) \leq f(a).$ 一方 $f$ は順序を保つから $f(f(a)) < f(a)$ で矛盾。よって、$a \leq f(a)$ で、ok.\\
+        $x \leq f(x)$ で、矛盾。
+    \end{proof}
+
+    \begin{theorem} \label{well_found_theorem}
+        $\langle X, < \rangle, \, \langle Y, <' \rangle$ を整列順序とすると、以下のただひとつだけが成立する :
+        \begin{enumerate}[(i)]
+            \item $X \simeq Y$
+            \item $\operatorname{pred}(X, x) \simeq Y$ となる $x \in X$ がある
+            \item $X \simeq \operatorname{pred}(Y, y)$ となる $y \in Y$ がある
+        \end{enumerate}   
+    \end{theorem}
+    \begin{proof}
+        二つ以上が同時に成立することはないのは前定理を使えばすぐに示せる。
+        \begin{alignat*}{5}
+           X' &=& \{x &\in& X : \exists y &\in& Y (\operatorname{pred}(X, x) &\simeq& \operatorname{pred}(Y, y))\}&\\
+           Y' &=& \{y &\in& Y : \exists x &\in& X (\operatorname{pred}(Y, y) &\simeq& \operatorname{pred}(X, x))\}&\\
+        \end{alignat*}
+        とおくと、$X'$ は $X$ それ自身か、$X$ の切片であることが示せて、前定理より $X' \simeq Y'$ であることが示せる。$X' = \operatorname{pred}(X, x), Y' = \operatorname{pred}(Y, y)$ がどちらも切片なら $x \in X'$ となるはずで、矛盾。よってどれか一つは成立する。
+    \end{proof}
+    \newpage
+    
+    \section{順序数}
+    \begin{definition*} \label{transitive}
+        集合 $x$ が推移的(transitive)であるとは、$\forall y \in x \, (y \subseteq x)$ となることをいう。
+    \end{definition*}
+    \begin{definition*} \label{ordinal_number}
+        集合 $x$ が順序数(ordinal number)であるとは、推移的かつ、$R = \{ \langle y, z \rangle \in x \times x : y \in z\}$ が $x$ を整列付けすることをいう。
+    \end{definition*}
+    \begin{example}
+        $0 = \{\}, \ 1 = \{0\}, \ 2 = \{0, 1\}, \cdots$
+    \end{example}
+    \begin{remark}
+        整列順序の同型定理(\ref{well_found_theorem}) によると、整列順序は、「整列集合の大きさ」以外に違いがないことがわかる。ところで、$\in$ は二項関係に見えるから、これを整列順序に持つような整列集合を考えるとなにか面白い事が言えそう。それだけだとうまく行かないから、「推移的」という仮定を加えた。
+    \end{remark}
+    \vspace{1ex}
+    
+    \begin{proposition} \label{ordinal_basic_1} \
+        \begin{enumerate}[(i)]
+            \item $\beta$ が順序数であり、$\alpha \in \beta$ なら $\alpha$ も順序数である。
+            \item $\alpha, \beta$ が順序数で、$\alpha \simeq \beta$ なら $\alpha = \beta.$
+            \item $\alpha, \beta$ が順序数なら $\alpha \in \beta, \ \alpha = \beta, \ \beta \in \alpha$ のどれかひとつだけが成立する。
+        \end{enumerate}   
+    \end{proposition}
+    \begin{proof} \ \\
+        (i): \\
+        $\alpha \subseteq \beta$ だから、$\in$ によって整列付けされることは明らか。推移的であることを示せば良い。$\gamma \in \alpha, \ \delta \in \gamma$ とする。\\
+        $\gamma \in \alpha \subseteq \beta$ だから $\gamma \in \beta.$ よって $\gamma \subseteq \beta.$ したがって、$\delta \in \gamma \subseteq \beta$ なので $\delta \in \beta.$ \\
+        $\alpha, \gamma, \delta \in \beta$ であり、$\delta \in \gamma \in \alpha$ だから $\delta \in \alpha.$ よって $\gamma \subseteq \alpha$ であり、$\alpha$ は推移的である。\\
+        (ii): \\
+        $f: \alpha \rightarrow \beta$ が順序同型であるとする。帰納法で、$\xi \in \alpha$ に対して $f(\xi) = \xi$ であることを示す。$\eta \in \xi \rightarrow \eta = f(\eta)$ を仮定する。順序を保つから $\eta \in \xi \rightarrow \eta = f(\eta) \in \xi.$ よって $\xi \subseteq f(\xi).$ 逆に、$\eta \in f(\xi)$ なら、$f(\eta') = \eta$ となる $\eta'$ は、$\eta' \in \xi$ であるので、$\eta = f(\eta') = \eta'$ であり、$\eta \in \xi.$ つまり $f(\eta) \subseteq \eta.$\\
+        (iii): \\
+        $\xi$ の $\eta$ による切片は $\eta$ 自身になることと、(ii) と (\ref{well_found_theorem}) を用いれば良い。\\
+    \end{proof}
+    \vspace{1ex}
+    
+    \begin{remark*}
+        ギリシャ文字 $\alpha, \beta, \cdots$ は特に断らなくても順序数のこととする。$\forall \alpha (\cdots)$ などは $\forall x (x$ は順序数 $\rightarrow \cdots)$ の略記とする。\\
+        また、$\alpha < \beta$ は $\alpha \in \beta$ のこととする。
+    \end{remark*}
+    
+    \begin{definition*} \
+        $\bf{ON} = \{\ \alpha : \alpha$ は順序数 $\}.$
+    \end{definition*}
+    \begin{proposition} $\bf{C} \subseteq \bf{ON}$ が空でないクラスなら、最小元を持つ。
+    \end{proposition}
+    \begin{proof}
+        $\alpha \in \bf{C}$ が最小元でないとき、$\alpha$ の空でない部分集合 $\alpha \cap \bf{C}$ の最小元は $\bf{C}$ の最小元である。
+    \end{proof}
+    \begin{proposition} \label{ordinal_basic_2} $C$ が順序数からなる推移的な集合ならば、順序数である。
+    \end{proposition}
+    \begin{proof}
+        $\in$ は $C$ を整列順序付けする。
+    \end{proof}
+    \begin{corollary} \label{Burali_Forti_Paradox} (ブラリ=フォルティのパラドックス) \\
+    $\bf{ON}$ は真のクラスである。
+    \end{corollary}
+    \begin{proof}
+        集合 $ON = \{\ \alpha : \alpha$ は順序数 $\}$ が存在したとする。$ON$ は順序数からなる推移的な集合だから、前定理より $ON$ は順序数。よって $ON \in ON$ だが、(\ref{ordinal_basic_1}-iii) より、自身を含む順序数は存在しない。
+    \end{proof}
+    \vspace{1ex}
+    
+    \begin{theorem}
+        $\langle X, R \rangle$ を整列順序とすると、それと順序同型な順序数がただ一つ存在する。
+    \end{theorem}
+    \begin{proof}
+        $p \not\in X$ を適当にとって $X' = X \cup \{p\}$ に整列順序 $<'$ を\\
+        $x <' y \leftrightarrow (x, y \in X \land x < y) \lor (x \in X \land y = p)$ と定義すれば、$X = \operatorname{pred}(X', p)$ である。\\
+        そこで、$x \in X$ の帰納法で、$\operatorname{pred}(X, x)$ と順序同型になる順序数の存在が言えれば良い(唯一性は、(\ref{ordinal_basic_1}-ii)より自動的にしたがう)。\\
+        $x' < x$ のとき $\operatorname{pred}(X, x')$ と順序同型になる(唯一の)順序数を $\alpha_{x'}$ として、置換公理によって $C = \{\alpha_{x'} : x' < x\}$ が存在する。\\
+        このとき、$C$ は順序数であり、$\operatorname{pred}(X, x) \simeq C$ となることを示そう。$\beta \in \alpha_{x'}$ のとき、$\beta$ は $\alpha_{x'}$ の切片であり、順序同型写像 $f_{x'} : \operatorname{pred}(X, x') \rightarrow \alpha_{x'}$ による $\beta$ の逆像は再び切片であり、よって $\beta \in C.$ よって $C$ は順序数からなる推移的な集合だから、順序数。$f : \operatorname{pred}(X, x) \rightarrow C$ を $x' \mapsto \alpha_{x'}$ で定めればこれは順序同型である。
+    \end{proof}
+    \begin{definition*}
+        $\langle X, R \rangle$ が整列順序のとき、$\operatorname{type}(X, R)$ を $\langle X, R \rangle$ と順序同型な(ただ一つの)順序数とする。
+    \end{definition*}
+    \vspace{1ex}
+    
+    \begin{proposition} \label{ordinal_basic_3} $\alpha \leq \beta \rightarrow \alpha \subseteq \beta$ である。
+    \end{proposition}
+    \begin{proof}
+        $\alpha \in \beta$ なら $\alpha \subseteq \beta.$ $\alpha = \beta$ なら $\alpha \subseteq \beta.$ よって $\alpha \leq \beta \rightarrow \alpha \subseteq \beta.$ \\
+        $\alpha \subseteq \beta \land \beta < \alpha$ なら $\beta \in \beta$ となって矛盾するから、$\alpha \subseteq \beta \rightarrow \alpha \leq \beta$
+    \end{proof}
+        
+    \begin{proposition} \label{ordinal_basic_4} $C$ が順序数からなる集合のとき、$\sup C := \bigcup C$ は順序数であり、$C$ の上限である。
+    \end{proposition}
+    \begin{proof}
+        $\alpha \in \bigcup C$ のとき、$\alpha \in \beta$ となるような $\beta \in C$ がある。(\ref{ordinal_basic_1}-i) より $\alpha$ は順序数。\\
+        $\gamma \in \alpha$ のとき、$\alpha \subseteq \beta$ より $\gamma \in \beta \subseteq \bigcup C$ だから、$\alpha \subseteq \bigcup C.$\\
+        よって $\bigcup C$ は順序数からなる推移的な集合だから、順序数である。\\
+        $\xi$ が $C$ の上界なら、$\alpha \in C \rightarrow \alpha \subseteq \xi$ ゆえ $\bigcup C \subseteq \xi.$ \\
+        $\alpha \in C \rightarrow \alpha \subseteq \bigcup C$ は明らか。よって上限であることが示せた。 
+    \end{proof}
+    \vspace{1ex}
+    
+    \begin{definition*} \label{successor} $S(x) := x \cup \{x\}.$
+    \end{definition*}
+    \begin{remark}
+        以下に証明するように、$S(\alpha)$ は $\alpha$ よりも大きい順序数のうち最小の順序数である。
+    \end{remark}
+    
+    \begin{proposition} \label{ordinal_basic_5} \
+        \begin{enumerate}[(i)]
+            \item $S(\alpha)$ は順序数である。
+            \item $\alpha < \beta \leftrightarrow \alpha \leq \beta.$
+            \item $\alpha \leq S(\beta) \leftrightarrow \alpha \leq \beta.$
+        \end{enumerate} 
+    \end{proposition}
+    \begin{proof} \ \\
+        (i): (\ref{ordinal_basic_4}) を使う。\\
+        (ii): $\alpha \in \beta \leftrightarrow S(\alpha) \subseteq \beta.$\\
+        (iii): $\alpha \in S(\beta) \leftrightarrow \alpha \in \beta \lor \alpha \in \{\beta\}.$
+    \end{proof}
+    \vspace{0.5ex}
+    
+    \begin{definition*} \label{zero_one_} $0 = \{\}, \ 1 = S(0), \ 2 = S(1), \ 3 = S(2),\  \cdots$
+    \end{definition*}
+    \begin{definition*} \label{limit_ordinal} $S(\alpha') = \alpha$ となるような $\alpha'$ が存在するとき、$\alpha$ を後続順序数という。$0$ でも後続順序数でもない順序数を 極限順序数という。
+    \end{definition*}
+    \begin{definition*} \label{natural_number} $\alpha$ が自然数であるとは、$\forall \beta \leq \alpha (\,\beta = 0 \lor \beta$ は後続順序数 $)$ となることをいう。
+    \end{definition*}
+    
+    ここで、無限公理を思い出す:
+    \begin{axiom*} (\bf Inf)
+        \begin{center}
+            $\exists X (0 \in X \land \forall x \in X(S(x) \in X))$
+        \end{center}
+    \end{axiom*}
+    
+    このような $X$ は任意の自然数を含む。実際、$n$ が $X$ に含まれない最小の自然数なら、$n > 0$ ゆえ、$n = S(m)$ となる $m < n$ がある。$m$ は自然数であるから、最小性より $m \in X$ ゆえ $n = S(m) \in X$ となって矛盾する。そこで、以下の定義ができる:
+    
+    \begin{definition*} \label{omega} $\omega = \{\ n : n$ は自然数 $\}$
+    \end{definition*}
+    
+    \begin{theorem} \label{Peano_axioms} (ペアノの公理) \\
+        $\omega$ は最小の極限順序数であり、以下を満たす:
+        \begin{enumerate}[(i)]
+            \item $0 \in \omega$
+            \item $\forall n \in \omega (S(n) \in \omega)$
+            \item $\lnot\exists n \in \omega (S(n) = 0)$
+            \item $\forall n \in \omega \forall m \in \omega (S(n) = S(m) \rightarrow n = m)$
+            \item $\forall X \subseteq \omega (0 \in X \land \forall n \in X (S(n) \in X) \rightarrow X = \omega)$
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof} \ \\
+    (v): $\omega$ の定義の前にある説明と同じ方法で示される。
+    \end{proof}
+    \newpage
+    
+    \section{超限再帰}
+    \begin{definition*} \label{transfinite_recursion}
+        ${\bf V} = \{ x : x = x \}.$
+    \end{definition*}
+    \begin{theorem}
+        ${\bf F} : {\bf V} \rightarrow {\bf V}$ を関数クラスとする。このとき、唯一の関数クラス ${\bf G} : \bf{ON} \rightarrow {\bf V}$ で \\
+        $$\forall \alpha(\,{\bf G}(\alpha) ={\bf F}({\bf G}\restriction\alpha)\,)$$
+        を満たすものが存在する。
+    \end{theorem}
+    \begin{proof} \ \\
+        唯一性はほとんど自明で、${\bf G}_1, {\bf G}_2$ がそれなら、$\alpha < \delta \rightarrow {\bf G}_1(\alpha) = {\bf G}_2(\alpha)$ が成立するとき ${\bf G}_1\restriction\delta = {\bf G}_2\restriction\delta$ ゆえ ${\bf G}_1(\alpha) = {\bf F}({\bf G}_1\restriction\delta) = {\bf F}({\bf G}_2\restriction\delta) = {\bf G}_2(\alpha).$ よって帰納法によって一意性は示されている。\\
+        存在性について、$\delta$ 上の関数 $g$ が $\forall \alpha < \delta(\,g(\alpha) ={\bf F}(g\restriction\alpha)\,)$ を満たしているとき、$g$ を $\delta$-近似と呼ぶことにすれば、$\delta$ 近似は一意的に存在し、$\delta' < \delta$ のとき $g\restriction\delta'$ は $\delta'$-近似になる。\\
+        $0$-近似が存在するのは自明。\\
+        $\alpha < \delta$ のとき $\alpha$-近似 $g_\alpha$ が存在するとしよう。$\delta = S(\delta')$ となるような $\delta'$ があるとき、$g_\delta$ を、$\alpha < \delta'$ のとき $g_\delta(\alpha) = g_{\delta'}(\alpha), \ g_\delta(\delta') = {\bf F}(g_{\delta'})$ とすれば、$g_\delta$ は $\delta$-近似である。\\
+        $\delta$ が極限順序数であるなら、$\alpha < \delta$ に対して、適当な $\beta \ (\alpha < \beta < \delta)$ で $g_\delta(\alpha) = g_\beta(\alpha)$ と定義すれば、$g_\delta$ は $\delta$-近似である。\\
+        最後に、${\bf G}(\alpha)$ を、適当な $\delta$-近似 $(\delta > \alpha)$ $g_\delta$ による $g_\delta(\alpha)$ と定義すれば、これは定理の主張を満たす。
+    \end{proof}
+    
+    \begin{example}
+        ${\bf F} : {\bf V} \rightarrow {\bf V}$ を、$f$ がある $n \in \omega$ 上の関数であるとき、$n > 0 \rightarrow {\bf F}(f) = n \times f(n-1), \ n = 0 \rightarrow {\bf F}(f) = 1$ と定義して、それ以外の場合 ${\bf F}(f) = 0$ としておく。このとき、上の定理が主張する ${\bf G}$ は $\omega$ に制限したとき、階乗関数そのものである。
+    \end{example}
+    
+    \begin{example} \ \\
+        $\gamma$ を固定して
+        \begin{itemize}
+        \item $\gamma + 0 = \gamma,$
+        \item $\gamma + S(\alpha) = S(\gamma + \alpha),$
+        \item $\alpha$ が極限順序数なら $\gamma + \alpha = \sup \{\gamma + \xi : \xi < \alpha\},$
+        \end{itemize}
+        と帰納的に定める。また、
+        \begin{itemize}
+        \item $\gamma \cdot 0 = 0,$
+        \item $\gamma \cdot S(\alpha) = \gamma \cdot \alpha + \gamma,$
+        \item $\alpha$ が極限順序数なら $\gamma \cdot \alpha = \sup \{\gamma \cdot \xi : \xi < \alpha\},$
+        \end{itemize}
+        \begin{itemize}
+        \item $\gamma^0 = 0,$
+        \item $\gamma^S(\alpha) = \gamma^\alpha \cdot \gamma,$
+        \item $\alpha$ が極限順序数なら $\gamma^\alpha = \sup \{\gamma^\xi : \xi < \alpha\},$
+        \end{itemize}
+        と帰納的定義する。\\
+        この定義は、以下の組み合わせ的定義と一致する : \\
+        $\alpha + \beta = \operatorname{type}(\alpha \times \{0\} \cup \beta \times \{1\}, \ R).$ ただし、
+        \begin{alignat*}{1}
+            R = \, & \{\langle \langle \xi, 0 \rangle, \langle \eta, 0 \rangle \rangle : \xi, \eta \in \alpha, \ \xi < \eta\}\\
+            \cup \,& \{\langle \langle \xi, 1 \rangle, \langle \eta, 1 \rangle \rangle : \xi, \eta \in \beta, \ \xi < \eta\}\\
+            \cup \, & \{\langle \langle \xi, 0 \rangle, \langle \eta, 1 \rangle \rangle : \xi \in \alpha, \ \eta \in \beta\}.
+        \end{alignat*}
+        $\alpha \cdot \beta = \operatorname{type}(\beta \times \alpha, \lhd).$ ただし、
+        \begin{alignat*}{1}
+            &\langle \xi, \eta \rangle \lhd \langle \xi', \eta' \rangle \leftrightarrow (\xi < \xi') \lor (\xi = \xi' \land \eta < \eta')
+        \end{alignat*}
+    \end{example}
+    
+    \section{基数}
+    \begin{definition*}
+        $X \preceq Y$ とは $X$ から $Y$ への単射が存在すること、$X \approx Y$ とは $X$ から $Y$ への単射が存在すること、そして $X \prec Y$ とは $X \preceq Y \land X \not\approx Y$ のことと定義する。
+    \end{definition*}
+    \begin{theorem} \label{Bernstein} (ベルンシュタインの定理) \\
+        $X \preceq Y \land Y \preceq X \rightarrow X \approx Y.$ 
+    \end{theorem}
+    \begin{theorem} \label{Cantor} (カントールの定理) \\
+        $X \prec \mathcal{P}(X).$ 
+    \end{theorem}
+    \vspace{1ex}
+    
+    \begin{definition*}
+        $X \approx \alpha$ となるような $\alpha$ のうち最小のものを $|X|$ と書く。
+    \end{definition*}
+    \begin{remark}
+        $|X|$ が定義できるためには、$X \simeq \alpha$ となるような順序数が少なくとも一つは存在しなければならない。これは、$X$ が整列順序付け可能であることと同値である。$\rm AC$ のもとでは全ての集合が整列順序付け可能であるから、$|X|$ が常に定義できる。しかし、$\rm AC$ を仮定せずに話を進めるときは、{\bf $|X|$ と書いたら $X$ は整列順序付けできるという仮定を暗に含んでいる}ことにする。
+    \end{remark}
+    \begin{definition*}
+        $|\kappa| = \kappa$ となるような順序数のことを基数という。
+    \end{definition*}
+    \begin{remark}
+        $\kappa$が基数 $\leftrightarrow \forall \alpha < \kappa(\alpha \not\approx \kappa)$ である。任意の $X$ に対して $||X|| = |X|$ だから $|X|$ は基数である。
+    \end{remark}
+    \vspace{1ex}
+    
+    \begin{theorem}
+        自然数 $n \in \omega$ は基数。$\omega$ は基数。
+    \end{theorem}
+    \begin{proof}
+        $n+1 \approx n+2 \rightarrow n \approx n+1$ を示す。その後帰納法を使って $n \not\approx n+1$ を示せれば終わり。
+    \end{proof}
+    
+    \begin{theorem}
+        $\forall \alpha \exists \kappa (\ \alpha < \kappa \land \kappa$ は基数 $).$
+    \end{theorem}
+    \begin{proof} \ \\
+        $\alpha\geq\omega$ と仮定して良い。$\kappa > \alpha$ が、$\alpha$ より大きい基数であったとしよう。そのとき、$\alpha \not\approx \kappa$ である。$\beta > \alpha$ が $\beta \approx \alpha$ なら $|\beta| = |\alpha| < \kappa = |\kappa|$ だから、$\beta < \kappa$ となるはずである。\\
+        つまり、$\kappa \geq \sup \{\beta : \beta \approx \alpha\}$ となるはずである。\\
+        この観察を逆に用いる。$f : \alpha \rightarrow \beta$ が全単射なら、$\alpha$ 上の整列順序 $R$ を $xRy \rightarrow f(x) < f(y)$ とすることで、$type(\alpha, R) = \beta$ とできる。\\
+        そこで、$W = \{\ R \subseteq \alpha \times \alpha : R$ は $\alpha$ 上の整列順序 $\}$ として、$C = \{\operatorname{type}(\alpha, R) : R \in W\}$ として、$\kappa = \sup C$ とおく。\\
+        $\beta < \kappa, \beta \approx \kappa$ のとき、$\beta \in \gamma$ となる $\gamma \in C$ があって、$\kappa \approx \beta \preceq \gamma \approx \alpha \preceq \kappa.$ したがって $\alpha \approx \kappa$ となる。$\kappa \geq \omega$ だから、$\kappa = 1 + \kappa \approx \kappa + 1$ (前者の等号は帰納法によって示せ、後者は足し算の組み合わせ的定義から導ける)。したがって $\alpha \approx \kappa+1$ なので、$\kappa+1 \in C$ で、$\kappa = \sup C \geq \kappa + 1$ となって矛盾する。\\
+        故に $\kappa$ は基数である。$\alpha + 1 \in C$ だから $\kappa > \alpha.$
+    \end{proof}
+    \begin{definition*}
+        $\alpha^+$ を $\alpha$ より大きいうち最小の基数とする。
+    \end{definition*}
+    \begin{remark}
+        上の定理の証明において $\alpha^+ = \kappa$ である。
+    \end{remark}
+    \vspace{1ex}
+    \begin{theorem}
+        C が基数からなる集合なら $\sup C$ も基数。
+    \end{theorem}
+    \begin{proof} \ \\
+        略。
+    \end{proof}
+    \begin{definition*} \ \\
+        $X$ が有限であるとは、$|X| = n \in \omega$ となることをいう。無限とは有限でないことを指す。\\
+        $X$ が可算でであるとは、$|X| \leq \omega$ となることであり、非可算とは可算でないことをいう。\\
+        $\alpha^+$ という形の無限基数を後続基数といい、それ以外の無限基数を極限基数という。
+    \end{definition*}
+
+    \begin{definition*} \ \\
+        $\alpha$ についての超限再帰によって、
+        \begin{itemize}
+            \item $\aleph_0 = \omega,$
+            \item $\aleph_{\alpha+1} = \aleph_\alpha^+,$
+            \item $\alpha$ が極限順序数なら $\aleph_\alpha = \sup \{\aleph_\xi : \xi < \alpha\},$
+        \end{itemize}
+        と定める。$\omega_\alpha = \aleph_\alpha$ とも書く。
+    \end{definition*}
+    
+    \begin{theorem}
+        任意の無限基数は $\aleph_\alpha$ という形である。また、$\aleph_\alpha$ が後続基数であることと $\alpha$ が後続順序数であることは同値。
+    \end{theorem}
+    \begin{proof} \ \\
+        帰納法によって証明する。無限基数 $\kappa$ が後続順序数 $\alpha^+$ なら、$\lambda = |\alpha|$ とすれば $\lambda^+ = \kappa$ であり、帰納法の仮定により $\lambda = \aleph_\alpha$ と書ける。$\kappa = \aleph_{\alpha+1}$ となる。\\
+        $\kappa$ が極限基数なら、$\kappa = \sup \{\aleph_\alpha < \kappa : \alpha < \kappa\}$ である。実際、$\xi \in \kappa$ のとき、$\xi < \xi^+ < \kappa.$ 帰納法の仮定により $\xi^+ = \aleph_\beta$ となる $\beta$ があって、 $\kappa > \aleph_\beta \geq \beta$ だから $\xi \in \sup \{\aleph_\alpha < \kappa : \alpha < \kappa\}.$ 逆の包含関係は良い。\\
+        そこで、$\gamma = \sup \{\alpha < \kappa : \aleph_\alpha < \kappa\}$ とすれば $\kappa = \aleph_\gamma.$ 実際、$\kappa$ は極限順序数だから $\gamma$ は極限順序数となることが示せ、$\aleph_\gamma$ の定義より直ちに従う。
+    \end{proof}
+    
+    \section{参考文献}
+    \begin{enumerate}[]
+        \item Jech, T. [2006] {\it Set Theory} (Springer, Berlin)
+        \item Kunen, K. [1992] {\it Set Theory} (North Holland, Netherlands)
+    \end{enumerate}
+
+\end{document}
