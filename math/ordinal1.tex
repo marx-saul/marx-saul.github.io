@@ -111,8 +111,8 @@
     \begin{proof}
         $\alpha \in \bf{C}$ が最小元でないとき、$\alpha$ の空でない部分集合 $\alpha \cap \bf{C}$ の最小元は $\bf{C}$ の最小元である。
     \end{proof}
-    \begin{proposition} \label{ordinal_basic_2} $C$ が順序数からなる推移的な集合ならば、順序数である。
-    \end{proposition}
+    \begin{lemma} \label{ordinal_basic_2} $C$ が順序数からなる推移的な集合ならば、順序数である。
+    \end{lemma}
     \begin{proof}
         $\in$ は $C$ を整列順序付けする。
     \end{proof}
@@ -139,15 +139,15 @@
     \end{definition*}
     \vspace{1ex}
     
-    \begin{proposition} \label{ordinal_basic_3} $\alpha \leq \beta \rightarrow \alpha \subseteq \beta$ である。
-    \end{proposition}
+    \begin{lemma} \label{ordinal_basic_3} $\alpha \leq \beta \rightarrow \alpha \subseteq \beta$ である。
+    \end{lemma}
     \begin{proof}
         $\alpha \in \beta$ なら $\alpha \subseteq \beta.$ $\alpha = \beta$ なら $\alpha \subseteq \beta.$ よって $\alpha \leq \beta \rightarrow \alpha \subseteq \beta.$ \\
         $\alpha \subseteq \beta \land \beta < \alpha$ なら $\beta \in \beta$ となって矛盾するから、$\alpha \subseteq \beta \rightarrow \alpha \leq \beta$
     \end{proof}
         
-    \begin{proposition} \label{ordinal_basic_4} $C$ が順序数からなる集合のとき、$\sup C := \bigcup C$ は順序数であり、$C$ の上限である。
-    \end{proposition}
+    \begin{lemma} \label{ordinal_basic_4} $C$ が順序数からなる集合のとき、$\sup C := \bigcup C$ は順序数であり、$C$ の上限である。
+    \end{lemma}
     \begin{proof}
         $\alpha \in \bigcup C$ のとき、$\alpha \in \beta$ となるような $\beta \in C$ がある。(\ref{ordinal_basic_1}-i) より $\alpha$ は順序数。\\
         $\gamma \in \alpha$ のとき、$\alpha \subseteq \beta$ より $\gamma \in \beta \subseteq \bigcup C$ だから、$\alpha \subseteq \bigcup C.$\\
@@ -163,13 +163,13 @@
         以下に証明するように、$S(\alpha)$ は $\alpha$ よりも大きい順序数のうち最小の順序数である。
     \end{remark}
     
-    \begin{proposition} \label{ordinal_basic_5} \
+    \begin{lemma} \label{ordinal_basic_5} \
         \begin{enumerate}[(i)]
             \item $S(\alpha)$ は順序数である。
             \item $\alpha < \beta \leftrightarrow \alpha \leq \beta.$
-            \item $\alpha \leq S(\beta) \leftrightarrow \alpha \leq \beta.$
+            \item $\alpha < S(\beta) \leftrightarrow \alpha \leq \beta.$
         \end{enumerate} 
-    \end{proposition}
+    \end{lemma}
     \begin{proof} \ \\
         (i): (\ref{ordinal_basic_4}) を使う。\\
         (ii): $\alpha \in \beta \leftrightarrow S(\alpha) \subseteq \beta.$\\
@@ -281,13 +281,16 @@
         $X \approx \alpha$ となるような $\alpha$ のうち最小のものを $|X|$ と書く。
     \end{definition*}
     \begin{remark}
-        $|X|$ が定義できるためには、$X \simeq \alpha$ となるような順序数が少なくとも一つは存在しなければならない。これは、$X$ が整列順序付け可能であることと同値である。$\rm AC$ のもとでは全ての集合が整列順序付け可能であるから、$|X|$ が常に定義できる。しかし、$\rm AC$ を仮定せずに話を進めるときは、{\bf $|X|$ と書いたら $X$ は整列順序付けできるという仮定を暗に含んでいる}ことにする。
+        $|X|$ が定義できるためには、$X \approx \alpha$ となるような順序数が少なくとも一つは存在しなければならない。これは、$X$ が整列順序付け可能であることと同値である。$\rm AC$ のもとでは全ての集合が整列順序付け可能であるから、$|X|$ が常に定義できる。しかし、$\rm AC$ を仮定せずに話を進めるときは、{\bf $|X|$ と書いたら $X$ は整列順序付けできるという仮定を暗に含んでいる}ことにする。
     \end{remark}
     \begin{definition*}
-        $|\kappa| = \kappa$ となるような順序数のことを基数という。
+        $|\kappa| = \kappa$ となるような順序数のことを基数(cardinal number)という。
     \end{definition*}
     \begin{remark}
         $\kappa$が基数 $\leftrightarrow \forall \alpha < \kappa(\alpha \not\approx \kappa)$ である。任意の $X$ に対して $||X|| = |X|$ だから $|X|$ は基数である。
+    \end{remark}
+    \begin{remark}
+        無限基数は極限順序数である。
     \end{remark}
     \vspace{1ex}
     
@@ -316,9 +319,9 @@
         上の定理の証明において $\alpha^+ = \kappa$ である。
     \end{remark}
     \vspace{1ex}
-    \begin{theorem}
+    \begin{lemma}
         C が基数からなる集合なら $\sup C$ も基数。
-    \end{theorem}
+    \end{lemma}
     \begin{proof} \ \\
         略。
     \end{proof}
@@ -345,6 +348,168 @@
         帰納法によって証明する。無限基数 $\kappa$ が後続順序数 $\alpha^+$ なら、$\lambda = |\alpha|$ とすれば $\lambda^+ = \kappa$ であり、帰納法の仮定により $\lambda = \aleph_\alpha$ と書ける。$\kappa = \aleph_{\alpha+1}$ となる。\\
         $\kappa$ が極限基数なら、$\kappa = \sup \{\aleph_\alpha < \kappa : \alpha < \kappa\}$ である。実際、$\xi \in \kappa$ のとき、$\xi < \xi^+ < \kappa.$ 帰納法の仮定により $\xi^+ = \aleph_\beta$ となる $\beta$ があって、 $\kappa > \aleph_\beta \geq \beta$ だから $\xi \in \sup \{\aleph_\alpha < \kappa : \alpha < \kappa\}.$ 逆の包含関係は良い。\\
         そこで、$\gamma = \sup \{\alpha < \kappa : \aleph_\alpha < \kappa\}$ とすれば $\kappa = \aleph_\gamma.$ 実際、$\kappa$ は極限順序数だから $\gamma$ は極限順序数となることが示せ、$\aleph_\gamma$ の定義より直ちに従う。
+    \end{proof}
+    \newpage
+    
+    \section{基数の演算}
+    \begin{definition*} \ \\
+        集合 $A, B$ に対して、$^AB = \{\ f \subseteq A \times B : f$ は関数 $ \}$ と定める。基数 $\kappa, \lambda$ に対して
+        \begin{itemize}
+            \item $\kappa \oplus \lambda = |\kappa \times \{0\} \cup \lambda \times \{1\}|,$
+            \item $\kappa \otimes \lambda = |\kappa \times \lambda|,$
+            \item $\kappa^\lambda = |^\lambda\kappa|$
+        \end{itemize}
+        と定める。
+    \end{definition*}
+    
+    \begin{lemma}
+        $\kappa$ が無限基数のとき $\kappa \otimes \kappa = \kappa.$
+    \end{lemma}
+    \begin{proof} \ \\
+        帰納法で示す。$\kappa \times \kappa$ 上の辞書式順序を $\lhd$ として、$\kappa \times \kappa$ 上の整列順序 $R$ を\\
+        $\langle \alpha, \beta \rangle R \langle \alpha', \beta' \rangle \leftrightarrow \max(\alpha, \beta) < \max(\alpha', \beta') \lor (\max(\alpha, \beta) = \max(\alpha', \beta') \, \land \, \langle \alpha, \beta \rangle \lhd \langle \alpha', \beta' \rangle )$\\
+        と定義する。このとき、$\langle \alpha, \beta \rangle \in \kappa \times \kappa$ による切片は $(\max(\alpha, \beta)+1) \times (\max(\alpha, \beta)+1)$ の部分集合だから、\\
+        $\operatorname{type}(\kappa \times \kappa, R) = \delta$ について、$\gamma < \delta \rightarrow |\gamma| \leq |(\max(\alpha, \beta) + 1) \times (\max(\alpha, \beta) + 1)| < \kappa.$ 最後の不等号は帰納法の仮定によるものである。\\
+        このことから、$|\kappa \times \kappa| \leq \delta \leq \kappa$ が言えた。
+    \end{proof}
+    
+    \begin{theorem} \label{cardinal_operations}
+        $\kappa, \lambda$ が、どちらか一方は無限であるような基数のとき $\kappa \oplus \lambda = \kappa \otimes \lambda = \max(\kappa, \lambda).$
+    \end{theorem}
+    \begin{proof}
+        $\max(\kappa, \lambda) \leq \kappa \oplus \lambda \leq \kappa \otimes \lambda \leq \max(\kappa, \lambda) \otimes \max(\kappa, \lambda) = \max(\kappa, \lambda).$
+    \end{proof}
+    
+    \begin{remark}
+        基数の演算については結合法則や分配法則、交換法則、そして指数法則が成立する。\\
+        基数の演算と順序数の演算は別物である。たとえば、順序数の意味での $\omega^\omega$ は可算順序数だが、基数の意味での $\omega^\omega$ は、$\omega$ より大きい基数である。基数の演算と順序数の演算は自然数については一致する。\\
+        $|\mathcal{P}(\kappa)| = 2^\kappa$ である。カントールの定理 (\ref{Cantor}) より $\kappa < 2^\kappa$ なので $\kappa^+ \leq 2^\kappa$ であることがわかる。
+    \end{remark}
+    
+    \begin{definition*}\ \\
+        連続体仮説 $\rm(CH)$ とは、言明「$2^{\aleph_0} = \aleph_1$ 」のことである。\\
+        一般連続体仮説 $\rm(GCH)$ とは、言明「$\forall \alpha (2^{\aleph_\alpha} = \aleph_{\alpha+1})$ 」のことである。
+    \end{definition*}
+    \newpage
+    
+    \section{共終数と正則基数}
+    \begin{definition*} \label{cofinal}
+       極限順序数 $\alpha$ と関数 $f : \beta \rightarrow \alpha$ について、$f$ が非有界(unbounded)である、あるいは、共終(cofinal)に写すとは、$\forall \xi < \alpha \, \exists \eta < \beta \,(\,f(\eta) > \xi\,)$ となることをいう。言い換えると、$\sup\,\{f(\eta) : \eta < \beta\} = \alpha.$\\
+       $\alpha$ の共終数(cofinality) $\operatorname{cf}(\alpha)$ とは、$\alpha$ へ共終に写すような関数が存在するような最小の順序数のことである。
+    \end{definition*}
+    
+    \begin{lemma}
+        単調増加な共終に写す関数 $f : \operatorname{cf}(\alpha) \rightarrow \alpha$ が存在する。
+    \end{lemma}
+    \begin{proof}
+        共終に写す関数 $g : \operatorname{cf}(\alpha) \rightarrow \alpha$ を取り、$f$ を超限再帰によって
+        $$f(\xi) = \max\,(\,g(\xi), \ \sup \, \{f(\xi') : \xi' < \xi\} + 1\,)$$
+        と定めれば良い。この定義は、$\xi < \operatorname{cf}(\alpha)$ のとき $f\restriction\xi : \xi \rightarrow \alpha$ は共終数の定義より有界であることと、$\alpha$ が極限順序数であることから、単調増加かつ共終に写す関数 $f : \operatorname{cf}(\alpha) \rightarrow \alpha$ を定義する。
+    \end{proof}
+    \begin{lemma} \label{cf_eq_cf}
+        $\alpha, \beta$ が極限順序数で、単調増加な共終に写す関数 $f : \alpha \rightarrow \beta$ が存在するなら、$\operatorname{cf}(\alpha) = \operatorname{cf}(\beta)$ である。
+    \end{lemma}
+    \begin{proof}
+        共終に写す単調増加な関数 $g : \operatorname{cf}(\alpha) \rightarrow \alpha, \ h : \operatorname{cf}(\beta) \rightarrow \beta$ を取る。\\
+        $f\circ g : \operatorname{cf}(\alpha) \rightarrow \beta$ は共終に写す。
+        実際、$\eta < \beta$ に対し、$f(\xi) > \eta$ となる $\xi < \alpha$ を取り、$g(\xi') > \xi$ となる $\xi' < \operatorname{cf}(\alpha)$ を取れば、単調増加性より $f(g(\xi')) > f(\xi) > \eta.$ よって $\operatorname{cf}(\beta) \leq \operatorname{cf}(\alpha).$\\
+        $F : \operatorname{cf}(\beta) \rightarrow \alpha$ を、$\eta < \operatorname{cf}(\beta)$ に対して、$h(\eta) < f(\xi)$ となる最小の $\xi < \alpha$ を $F(\eta)$ とすれば、これは共終に写す。実際、$\xi < \alpha$ に対して、$f(\xi) < h(\eta)$ となる $\eta < \operatorname{cf}(\beta)$ がある。定義より $h(\eta) < f(F(\eta))$ だから $f(\xi) < f(F(\eta))$ より、単調増加であるから $\xi < F(\eta).$ よって $\operatorname{cf}(\beta) \geq \operatorname{cf}(\alpha).$
+    \end{proof}
+
+    \begin{theorem}
+        $\alpha$ が極限順序数のとき $\operatorname{cf}(\operatorname{cf}(\alpha)) = \operatorname{cf(\alpha)}.$
+    \end{theorem}
+    
+    \begin{definition*}
+        $\operatorname{cf}(\alpha) = \alpha$ となる極限順序数を正則である、という。正則な順序数は無限基数である。正則でない基数を特異基数という。
+    \end{definition*}
+    \begin{remark}
+        $\gamma$ を極限順序数として、各 $\xi < \gamma$ に対して、単調増加な順序数列 $\langle \alpha_\xi : \xi<\gamma \rangle$ が定まっているとする。このとき、$\displaystyle \lim_{\xi \to \gamma} \alpha_\xi = \sup \{ \alpha_\xi : \xi < \gamma\}$ と定義することができる。\\
+        $\operatorname{cf}(\alpha)$ は、$\displaystyle \lim_{\xi \to \gamma} \alpha_\xi = \alpha$ となるような順序数列 $\langle \alpha_\xi : \xi<\gamma \rangle$ が存在するような $\gamma$ のうち最小のものである。\\
+        正則基数とは、自身よりも小さい基数による極限として表現できないような基数のことである。
+    \end{remark}
+    
+    \vspace{0.5ex}
+    
+    選択公理のもとでは、後続基数は正則である。以下ではそれを示そう。
+    \begin{lemma} (AC)
+        $f : A \rightarrow B$ が全射なら、単射 $g : B \rightarrow A$ が存在する。
+    \end{lemma}
+    \begin{lemma} (AC) \label{union_kappa_kappa}
+        $\kappa$ を無限基数として、各 $\alpha < \kappa$ に対して集合 $X_\alpha$ が定まっており、$|X_\alpha| \leq \kappa$ であるとする。 $\displaystyle \left| \bigcup_{\alpha < \kappa} X_\alpha \right| \leq \kappa$ である。
+    \end{lemma}
+    \begin{proof}
+        各 $\alpha < \kappa$ に対して $f_\alpha : \kappa \rightarrow X_\alpha$ を選択する。$\displaystyle \kappa \times \kappa \rightarrow \bigcup_{\alpha < \kappa} X_\alpha$ を $\langle \alpha, \beta \rangle \mapsto f_\alpha(\beta)$ と定めると全射である。したがって補題より $\displaystyle \left| \bigcup_{\alpha < \kappa} X_\alpha \right| \leq \kappa \otimes \kappa = \kappa.$
+    \end{proof}
+    
+    \begin{theorem} (AC)
+        任意の後続基数 $\kappa^+$ は正則である。
+    \end{theorem}
+    \begin{proof}
+        正則でないとすると、共終に写す $f : \kappa \rightarrow \kappa^+$ が存在する。$\alpha < \kappa$ に対し、$X_\alpha = \{\xi < \kappa^+ : \xi < f(\alpha)\}$ とすると、$\displaystyle \bigcup_{\alpha < \kappa} X_\alpha = \kappa^+.$\\
+        しかし、$f(\alpha) < \kappa$ より $|X_\alpha| < \kappa^+$ なので $|X_\alpha| \leq \kappa.$ (\ref{union_kappa_kappa}) より $|X_\alpha| \leq \kappa$ であるとする。 $\displaystyle \left| \bigcup_{\alpha < \kappa} X_\alpha \right| \leq \kappa$ となって、矛盾。
+    \end{proof}
+    
+    \vspace{1.0ex}
+    これで、選択公理のもとでは後続基数は正則であることがわかった。正則な極限基数としては $\omega$ があるが、これよりも大きい正則な極限基数はあるのだろうかという疑問が湧く。
+    
+    \begin{definition*}
+        正則な非可算極限を、弱到達不能基数(weakly inaccessible cardinal)という。
+    \end{definition*}
+    \begin{proposition}
+        $\aleph_\alpha$ が弱到達不能基数ならば $\alpha = \aleph_\alpha$ である。
+    \end{proposition}
+    \begin{proof}
+        $\alpha \rightarrow \aleph_\alpha, \ \xi \mapsto \aleph_\xi$ は共終に写すので (\ref{cf_eq_cf}) より $\operatorname{cf}(\alpha) = \operatorname{cf}(\aleph_\alpha) = \aleph_\alpha.$ したがって、$\alpha \geq \operatorname{cf}(\alpha) = \aleph_\alpha.$ 逆の不等号は自明。
+    \end{proof}
+    \begin{remark}
+        この命題は、弱到達不能基数が非常に大きいことを示している。$\aleph_\alpha = \alpha$ となる最小の基数を構成してみよう。$\sigma_0 = \aleph_0, \ \sigma_{n+1} = \aleph_{\sigma_n}$ として $\sigma = \sup \, \{\sigma_n : n \in \omega\}$ とすれば、これは最小のものである。\\
+        まず、$\sigma$ は極限順序数である。\\
+        したがって、$\aleph_\sigma = \sup \, \{\aleph_\xi : \xi < \sigma\} = \sup \, \{\aleph_{\sigma_n} : n \in \omega\} = \sup \{\sigma_{n+1} : n \in \omega\} = \sigma.$ ただし、二番目の等号は、$\xi \in \sigma \leftrightarrow \exists n \in \omega \, (\xi < \sigma_n)$ を使った。\\
+        次に、$\aleph_\alpha = \alpha$ であるとき、$\sigma_0 \leq \alpha$ であり、$\sigma_n \leq \alpha$ であるなら $\sigma_{n+1} = \aleph_{\sigma_n} \leq \aleph_{\alpha} = \alpha$ なので、帰納法とあわせて $\sigma \leq \alpha = \aleph_\alpha.$\\
+        しかし、$\sigma$ は$\omega$-長の単調増加な順序数列の極限になっているから、$\operatorname{cf}(\sigma) = \omega$ であり、弱到達不能ではない。
+    \end{remark}
+    
+    \vspace{1.0ex}
+    
+    \begin{definition*}
+        基数 $\kappa$ が強極限(strong limit)であるとは、任意の基数 $\lambda < \kappa$ に対して $2^\lambda < \kappa$ となることをいう。
+    \end{definition*}
+    \begin{remark}
+        $\kappa$ を無限基数とする。$\kappa_0 = \kappa, \ \kappa_{n+1} = 2^{\kappa_{n}}$ として $\kappa_{\omega} = \sup \, \{\kappa_n : n \in \omega\}$ は $\kappa$ より大きいうち最小の強極限である。\\
+        $\operatorname{cf}(\kappa_\omega) = \omega.$
+    \end{remark}
+    \begin{definition*}
+        弱到達不能かつ強極限であることを、(強)到達不能(inaccessible)であるという。
+    \end{definition*}
+    
+    \newpage
+    \section{基数の冪乗}
+    \begin{theorem} \label{Konigs_lemma} (Kőnig) \\
+        $\kappa$ を無限基数とする。$\lambda \geq \operatorname{cf}(\kappa)$ なら $\kappa^\lambda > \kappa$ である。
+    \end{theorem}
+    \begin{proof}
+        $\lambda = \operatorname(\kappa)$ として良い。\\
+        $F : \kappa \rightarrow {^\lambda\kappa}$ が全射でないことを示そう。$F$ による像に入っていないような $f \in {^\lambda\kappa}$ を構成したい。\\
+        $f$ が $F$ による像に入っていない ことと、$\forall \xi \in \kappa \ (F(\xi) \neq f)$ となることは同値である。また、これは $\forall \xi \in \kappa \ \exists \eta \in \lambda \ (\,F(\xi)(\eta) \neq f(\eta)\,)$ と同値である。\\
+        そこで、$\eta \in \lambda$ に対して、$X_\eta = \{\xi \in \kappa : F(\xi)(\eta) \neq f(\eta)\}$ とおく。上の条件は $\bigcup_{\eta < \lambda} X_\eta = \kappa$ と同値。\\
+        いま、$h : \lambda \rightarrow \kappa$ を共終に写す写像であるとする。もし、$X_\eta = \{\xi < \kappa : \xi < f(\eta)\}$ なら $\bigcup_{\eta < \lambda} X_\eta = \kappa$ を満たす。\\
+        $f(\eta) = \min \, (\kappa - \{F(\xi)(\eta) : \xi < h(\eta)\})$ とすることができる。これは $\kappa$ が基数で $f(\eta) < \kappa$ だから $\min$ の中にある集合は空ではなく、well-defined である。\\
+        このように定義すれば、$X_\eta = \{\xi < \kappa : \xi < f(\eta)\}$ となって、$f$ は $F$ の像に入っていない。
+    \end{proof}
+    
+    \begin{theorem} \label{cardinal_power} (AC)\\
+        $\kappa, \lambda$ を基数で、少なくとも片方が無限であり、どちらも $2$ 以上とする。
+        \begin{enumerate}[(i)]
+            \item $\kappa \leq \lambda$ なら $\kappa^\lambda = 2^\lambda.$ さらに GCH を仮定すれば $\kappa^\lambda = \lambda^+.$
+            \item $\kappa > \lambda \geq \operatorname{cf}(\kappa)$ なら $\kappa < \kappa^\lambda \leq 2^\kappa.$ さらに GCH を仮定すれば $\kappa^\lambda = \kappa^+.$
+            \item GCH を仮定すれば $\operatorname{cf}(\kappa) > \lambda$ なら $\kappa^\lambda = \kappa.$
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof} \ \\
+        (i): $2^\lambda \leq \kappa^\lambda \leq \lambda^\lambda.$ また、(\ref{cardinal_operations}) より $^\lambda\lambda \subseteq \mathcal{P}(\lambda \times \lambda) \simeq \mathcal{P}(\lambda) \simeq 2^\lambda$ だから、$\lambda^\lambda = 2^\lambda$ であり、示された。\\
+        (ii): $\kappa < \kappa^\lambda$ は (\ref{Konigs_lemma}) で示されている。$\kappa^\lambda \leq \kappa^\kappa = 2^\kappa.$\\
+        (iii): $\operatorname{cf}(\kappa) > \lambda$ のとき、$\displaystyle ^\lambda \kappa = \bigcup_{\alpha < \kappa} {^\lambda \alpha}$ である。(iii) が $\kappa$ 未満の基数で成立すると仮定する。$\alpha < \kappa$ のとき、$|\alpha| < \kappa$ だから、$^\lambda\alpha = {^\lambda|\alpha|} \leq \max(|\alpha|, \lambda)^+ \leq \kappa.$ (\ref{Konigs_lemma}) より、$|{^\lambda \kappa}| \leq \kappa.$ よって示された。
     \end{proof}
     
     \section{参考文献}
