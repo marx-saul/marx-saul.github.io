@@ -476,8 +476,7 @@
         基数 $\kappa$ が強極限(strong limit)であるとは、任意の基数 $\lambda < \kappa$ に対して $2^\lambda < \kappa$ となることをいう。
     \end{definition*}
     \begin{remark}
-        $\kappa$ を無限基数とする。$\kappa_0 = \kappa, \ \kappa_{n+1} = 2^{\kappa_{n}}$ として $\kappa_{\omega} = \sup \, \{\kappa_n : n \in \omega\}$ は $\kappa$ より大きいうち最小の強極限である。\\
-        $\operatorname{cf}(\kappa_\omega) = \omega.$
+        $\kappa$ を無限基数とする。$\kappa_0 = \kappa, \ \kappa_{n+1} = 2^{\kappa_{n}}$ として $\kappa_{\omega} = \sup \, \{\kappa_n : n \in \omega\}$ は $\kappa$ より大きいうち最小の強極限である。$\operatorname{cf}(\kappa_\omega) = \omega.$
     \end{remark}
     \begin{definition*}
         弱到達不能かつ強極限であることを、(強)到達不能(inaccessible)であるという。
@@ -489,13 +488,13 @@
         $\kappa$ を無限基数とする。$\lambda \geq \operatorname{cf}(\kappa)$ なら $\kappa^\lambda > \kappa$ である。
     \end{theorem}
     \begin{proof}
-        $\lambda = \operatorname(\kappa)$ として良い。\\
+        $\lambda = \operatorname{cf}(\kappa)$ として良い。\\
         $F : \kappa \rightarrow {^\lambda\kappa}$ が全射でないことを示そう。$F$ による像に入っていないような $f \in {^\lambda\kappa}$ を構成したい。\\
         $f$ が $F$ による像に入っていない ことと、$\forall \xi \in \kappa \ (F(\xi) \neq f)$ となることは同値である。また、これは $\forall \xi \in \kappa \ \exists \eta \in \lambda \ (\,F(\xi)(\eta) \neq f(\eta)\,)$ と同値である。\\
         そこで、$\eta \in \lambda$ に対して、$X_\eta = \{\xi \in \kappa : F(\xi)(\eta) \neq f(\eta)\}$ とおく。上の条件は $\bigcup_{\eta < \lambda} X_\eta = \kappa$ と同値。\\
-        いま、$h : \lambda \rightarrow \kappa$ を共終に写す写像であるとする。もし、$X_\eta = \{\xi < \kappa : \xi < f(\eta)\}$ なら $\bigcup_{\eta < \lambda} X_\eta = \kappa$ を満たす。\\
-        $f(\eta) = \min \, (\kappa - \{F(\xi)(\eta) : \xi < h(\eta)\})$ とすることができる。これは $\kappa$ が基数で $f(\eta) < \kappa$ だから $\min$ の中にある集合は空ではなく、well-defined である。\\
-        このように定義すれば、$X_\eta = \{\xi < \kappa : \xi < f(\eta)\}$ となって、$f$ は $F$ の像に入っていない。
+        いま、$h : \lambda \rightarrow \kappa$ を共終に写す写像であるとする。例えば $X_\eta = \{\xi < \kappa : \xi < h(\eta)\}$ なら $\displaystyle \bigcup_{\eta < \lambda} X_\eta = \kappa.$\\
+        そこで、$f(\eta) = \min \, (\kappa - \{F(\xi)(\eta) : \xi < h(\eta)\})$ とすることができる。これは $\kappa$ が基数であり $h(\eta) < \kappa$ であることから $\min$ の中にある集合は空ではなく、well-defined である。\\
+        このように定義すれば、$X_\eta = \{\xi < \kappa : \xi < h(\eta)\}$ となって、$f$ は $F$ の像に入っていない。
     \end{proof}
     
     \begin{theorem} \label{cardinal_power} (AC)\\
@@ -509,7 +508,7 @@
     \begin{proof} \ \\
         (i): $2^\lambda \leq \kappa^\lambda \leq \lambda^\lambda.$ また、(\ref{cardinal_operations}) より $^\lambda\lambda \subseteq \mathcal{P}(\lambda \times \lambda) \simeq \mathcal{P}(\lambda) \simeq 2^\lambda$ だから、$\lambda^\lambda = 2^\lambda$ であり、示された。\\
         (ii): $\kappa < \kappa^\lambda$ は (\ref{Konigs_lemma}) で示されている。$\kappa^\lambda \leq \kappa^\kappa = 2^\kappa.$\\
-        (iii): $\operatorname{cf}(\kappa) > \lambda$ のとき、$\displaystyle ^\lambda \kappa = \bigcup_{\alpha < \kappa} {^\lambda \alpha}$ である。(iii) が $\kappa$ 未満の基数で成立すると仮定する。$\alpha < \kappa$ のとき、$|\alpha| < \kappa$ だから、$^\lambda\alpha = {^\lambda|\alpha|} \leq \max(|\alpha|, \lambda)^+ \leq \kappa.$ (\ref{Konigs_lemma}) より、$|{^\lambda \kappa}| \leq \kappa.$ よって示された。
+        (iii): $\operatorname{cf}(\kappa) > \lambda$ のとき、$\displaystyle ^\lambda \kappa = \bigcup_{\alpha < \kappa} {^\lambda \alpha}$ である。(iii) が $\kappa$ 未満の基数で成立すると仮定する。$\alpha < \kappa$ のとき、$|\alpha| < \kappa$ だから、$^\lambda\alpha \simeq |\alpha|^\lambda \leq \max(|\alpha|, \lambda)^+ \leq \kappa.$ (\ref{Konigs_lemma}) より、$|{^\lambda \kappa}| \leq \kappa.$ よって示された。
     \end{proof}
     
     \section{参考文献}
