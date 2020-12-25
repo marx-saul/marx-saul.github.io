@@ -1,0 +1,267 @@
+\documentclass{jsarticle}
+
+\usepackage{amsmath, amssymb, amsthm, amscd}
+%\usepackage{mathrsfs}
+\usepackage{enumerate}
+
+\theoremstyle{definition}
+\newtheorem*{axiom*}{公理}
+\newtheorem*{definition*}{定義}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{remark}{注}[section]
+\newtheorem*{remark*}{注}
+\newtheorem{example}{例}[section]
+\renewcommand\proofname{\rm [証明]}
+
+\parindent = 0pt
+
+\begin{document}
+    この pdf ではSuslinの仮説(SH)を述べ、それが $\omega_1$ Suslin木の不存在と同値であることを示す。
+    \section{全順序}
+    \begin{definition*} \label{total_order}
+        $\langle X, < \rangle$ が全順序(well-founded order)であるとは、
+        \begin{enumerate}[(i)]
+            \item $\lnot x < x$
+            \item $x < y \land y < z \rightarrow x < z$
+            \item $x < y \lor x = y \lor y < x$
+        \end{enumerate}
+        を満たすことをいう。$x \leq y$ とは、$x < y \lor x = y$ の略記であると定義する。
+    \end{definition*}
+    
+    \vspace{0.5ex}
+    
+    \begin{definition*} \label{open_interval}
+        全順序 $X$ の開区間とは、$a, b \in X, \ a < b$ による $X$ の部分集合 $(a, b) = \{x \in X : a < x < b\}$ のことである。開区間は空集合になりえることに注意。
+    \end{definition*}
+    
+    \begin{definition*} \label{order_topology}
+        全順序 $X$ 上の順序位相とは、開区間及び $X$ 自身を開基として持つ位相空間のことである。
+    \end{definition*}
+    
+    \begin{example}
+        $\langle \mathbb{R}, < \rangle$ の順序位相は距離による通常の位相と一致する。
+    \end{example}
+    
+    \vspace{0.5ex}
+    
+    \begin{definition*}  全順序 $X$ の部分集合 $A$ が稠密であるとは、$a, b \in X, \ a < b$ のとき、$(a,b) \cap A \neq \emptyset$ となることをいう。特に $X$ が稠密であるとき、$X$ は自己稠密である、という。
+    \end{definition*}
+    
+    \begin{remark}
+        $A$ が全順序の意味で稠密であるなら、位相空間の意味でも稠密である。逆に、$X$ が自己稠密で、$A$ が位相空間の意味で稠密であるなら、全順序の意味でも稠密である。
+    \end{remark}
+    
+    \vspace{0.5ex}
+    
+    \begin{definition*} 全順序 $X$ が境界を持たないとは、最大元と最小元を持たないことをいう。
+    \end{definition*}
+    
+    \begin{remark}
+        全順序 $X$ が境界を持たないとき、$(a, \infty)$ や $(-\infty, b]$ といった記号を使うことにする。どれも定義はすぐにわかるはずである。それぞれが開集合や閉集合になるのは直ちにわかるだろう。
+    \end{remark}
+
+    \vspace{0.5ex}
+     
+    \begin{definition*} 全順序 $X$ が完備であるとは、任意の非空部分集合について、それが上/下に有界であるとき上/下限を持つことをいう。
+    \end{definition*}
+    
+    \begin{example} \ \\
+        $\langle \mathbb{R}, < \rangle$ は境界を持たない自己稠密かつ完備な全順序である。\\
+        $\langle \mathbb{Q}, < \rangle$ は完備ではない。$\{x \in \mathbb{Q} : x^2 < 2\}$ は上に有界だが、上限を持たない。
+    \end{example}
+    
+    \vspace{0.5ex}
+    
+    二つの全順序があったとき、それらの間の順序を保つ写像や、順序同型の定義は簡単にできるだろう。可算な全順序に関する次の結果がある:
+    
+    \begin{theorem} \label{Cantor_countable_total_order} (Cantor) \\
+        境界がない自己稠密な可算な全順序集合 $\langle X, < \rangle$ は $\langle \mathbb{Q}, < \rangle$ と順序同型である。
+    \end{theorem}
+    \begin{proof}
+        $\langle X, < \rangle, \, \langle Y, \lhd \rangle$ が定理の条件を満たすとして、$X = \{ a_n : n \in \omega \}, \ Y = \{ b_n : n \in \omega \}$ とする。順序同型写像 $f : X \rightarrow Y$ を、順序を保ちつつ $f(a_0), \ f^{-1}(b_0), \ f(a_1), \ f^{-1}(b_1), \ f(a_2), \ f^{-1}(b_2), \ \cdots$ の順に定める。\\
+        例えば、$f(a_3)$ を決めるとき、
+        $$a_1 < f^{-1}(b_2) < a_0 < a_3 < f^{-1}(b_1) < a_2 < f^{-1}(b_0)$$
+        のようになっていたとする。\\
+        もし、$f^{-1}(b_0), \, f^{-1}(b_1), \, f^{-1}(b_2)$ のいずれかが $a_3$ なら、$f(a_3)$ を自動的に決める。\\
+        そうでないときは $f(a_3) = b_k$ を
+        $$f(a_1) < b_2 < f(a_0) < b_k < b_1 < f(a_2) < b_0$$
+        となるような $k$ のうち最小のものとすれば良い。これは、境界がないことと自己稠密であることから、$a_3$ がどの位置に挟まっていても対応するものが取れることから well-defined であり、$f^{-1}$ を同時に定めていることから、順序同型となることが言える。また、この証明には選択公理を必要としていない。
+    \end{proof}
+    
+    \subsection*{Dedekind切断}
+    \begin{definition*}
+        $\langle X, < \rangle$ を境界を持たない自己稠密な全順序とする。$X$ の Dedekind 切断とは、以下の条件を満たす $X$ の部分集合である。
+        \begin{enumerate}[(i)]
+            \item $A \neq \emptyset, \, X$
+            \item $x \in A \land y \in X - A \ \rightarrow \ x < y$
+            \item $A$ は最大元を持たない
+        \end{enumerate}
+    \end{definition*}
+    
+    \begin{theorem}
+        $\langle X, < \rangle$ を境界を持たない自己稠密な全順序とする。$X$ の Dedekind 切断全体の集合を $C$ に全順序が $A \preceq B \overset{{\rm def}}{\longleftrightarrow} A \subseteq B$ で入り、$f : X \rightarrow A$ を $f(x) = \{y \in X : y < x\}$ で定めることができ、これは順序を保つ単射である。このとき、$C$ は境界を持たない完備な全順序で、$f(X)$ は稠密な部分集合となる。
+    \end{theorem}
+    \begin{proof}
+        $A \not\subseteq B$ のとき、$a \in A - B$ を取る。$b \in B$ のとき、$b < a$ となる。もし $b \not\in A$ なら $a < b$ となるはずだから、矛盾。よって $B \subseteq A.$ $\preceq$ 全順序である。\\
+        完備性については、$\{A_\lambda : \lambda \in \Lambda\}$ が上に有界のときは $\bigcup A_\lambda$ が上限になり、下に有界のときは、$\bigcap A_\lambda$ から最大元(があれば)を除いたものが下限になる。\\
+        $f$ が well-defined であることは、$X$ が境界を持たないことと自己稠密であることからわかる。\\
+        $f(X)$ が $C$ 内で稠密であることを示すには、$A \prec B$ として、$A, B$ が $f(X)$ に属するか否かの4通りの場合を個別に考えると示せる。
+    \end{proof}
+    
+    \vspace{0.5ex}
+    Dedekind 切断は「完備化 」と呼ぶにふさわしいだろう。$\mathbb{R}$ は $\mathbb{Q}$ の Dedekind 切断全体として定義される。このような完備化は同型を除いてただひとつしか存在しないことを示せば、Cantor の定理(\ref{Cantor_countable_total_order})と合わせて $\mathbb{R}$ の特徴付けが得られるはずである。
+    \vspace{0.5ex}
+    
+    \begin{theorem}
+        $\langle X, < \rangle, \ \langle X', <' \rangle$ を境界を持たない自己稠密な全順序として、$f : X \rightarrow X'$ を順序同型写像とする。$\langle C, \prec \rangle, \ \langle C', \prec' \rangle$ が境界を持たない完備な全順序で、$\pi : X \rightarrow C, \ \pi' : X' \rightarrow C'$ が順序を保つ単射であり、$\pi(X), \, \pi(X')$ がそれぞれ $C, \, C'$ 内で稠密であるとする。このとき、$f$ を拡大する順序同型写像 $\widetilde{f} : C \rightarrow C'$ がただ一つ存在する。
+        \[
+          \begin{CD}
+             X @>{f}>> X' \\
+          @V{\pi}VV    @V{\pi'}VV \\
+             C   @>{\exists!\widetilde{f}}>>  C'
+          \end{CD}
+        \]
+    \end{theorem}
+    \begin{proof}
+        $\widetilde{f} : C \rightarrow C'$ を、$\widetilde{f}(a) = \sup \, \{ \pi'(f(x)) : x \in X, \, \pi(x) \leq a \}$ と定める。これが順序を保つことを示す。$a < b$ のとき、$x \in X$ で、$a < \pi(x) < b$ となるものが存在する。このとき、$\widetilde{f}(a) < \pi'(f(x)) \leq \widetilde{f}(b)$ となる。後ろの不等号は $\widetilde{f}(b)$ が上限であることから直ちに導かれ、前の不等号は $a < \pi(y) < \pi(x)$ となる $y \in X$ を取ると、$\pi'(f(y))$ は上界の一つであることからわかる。\\
+        次に、$\overline{f} : C \rightarrow C'$ が図式を可換にするような順序を保つ写像であったとする。\\
+        $x \in X, \ \pi(x) \leq a$ に対して $\pi'(f(x)) = \overline{f}(\pi(x)) \leq \overline{f}(a)$ だから、$\overline{f}(a)$ は $\{ \pi'(f(x)) : x \in X, \, \pi(x) \leq a \}$ の上界であり、$\widetilde{f}(a) \leq \overline{f}(a).$\\
+        $\widetilde{f}(a) < \overline{f}(a).$ であるとすると、$\widetilde{f}(a) < \pi'(f(x)) <  \overline{f}(a).$ となる $x \in X$ が存在する。\\
+        $\pi'(f(x)) = \overline{f}(\pi(x)) < \overline{f}(a)$ だから $\pi(x) < a$ であり、したがって定義によって $\pi'(f(x)) \leq \widetilde{f}(a)$ となるはずで、これは矛盾である。
+    \end{proof}
+    
+    \begin{corollary}
+        以下の条件を満たす全順序は $\langle \mathbb{R}, < \rangle$ と順序同型である。
+        \begin{enumerate}[(i)]
+            \item 境界を持たない
+            \item 完備
+            \item 可算な(全順序の意味での)稠密集合を持つ
+        \end{enumerate}
+    \end{corollary}
+    
+    \vspace{1.0ex}
+    
+    この定理を位相空間の言葉で言い換えることを考える。まず、(iii) は、自己稠密かつ可分、に言い換えることができる。そして、境界を持たないという条件のもと、完備かつ自己稠密は連結に言い換えることができる:
+    
+    \vspace{1.0ex}
+    
+    \begin{proposition}
+        $X$ を境界を持たない全順序であるとする。このとき、$X$ が完備かつ自己稠密であることは連結であることと同値である。
+    \end{proposition}
+    \begin{proof}
+        $X$ が完備かつ自己稠密であるとしよう。$A \neq \emptyset, X$ が開かつ閉集合であるとする。$b \in X - A$ を取ると、\\
+        $A_1 = (-\infty, \, b) \cap A = (-\infty, \, b] \cap A$\\
+        $A_2 = (b, \, +\infty) \cap A = [b, \, +\infty) \cap A$\\
+        はどちらも開かつ閉集合であり、二つの和集合は $A$ である。したがって、どちらかは空ではない。そこで、$A$ を空でない方に置き換えることで、$A$ は上か下に有界であると仮定して良い。上に有界であると仮定して議論する。\\
+        $m$ を $A$ の上限とする。$m \in (x, y)$ のとき、上限の定義により $x < a < m$ となる $a \in A$ が存在するから、$(x, y) \cap A \neq \emptyset.$ つまり $m \in \overline{A} = A$ である。$A$ は開集合であるから $m \in (x, y) \subseteq A$ となる $x, y$ が存在する。しかし、自己稠密性によって $m < a < y$ となる $a \in A$ が存在してしまうので、矛盾。\\
+        \ \\
+        逆に、$X$ が連結であるとしよう。$A\neq\emptyset$ を上に有界であると仮定して、$S$ を $A$ の上界全体とする。$x \not\in S$ のとき $a \in A$ で $x < a$ となるものが存在する。$x \in (-\infty, a) \subseteq X-S$ だから、$X-S$ は開集合である。\\
+        もし $S$ が最小元を持たないなら、$x \in S$ のとき $x' < x$ となる $x' \in S$ が存在して、$x \in (x', \infty) \subseteq S$ であり $S$ は開集合となる。\\
+        $X$ の連結性より $S = \emptyset, X$ だが、$A$ は上に有界だから $S \neq \empty.$ しかし、$S = X$ のとき $X$ が境界を持たないことに矛盾してしまう。\\
+        よって $S$ は最小限を持つ。つまり、$A$ は上限を持つ。下に有界なときも同じ方法で下限を持つことが示せる。
+    \end{proof}
+    
+    \vspace{0.5ex}
+    これで以下の定理が示せたことになる。
+    \vspace{0.5ex}
+    
+    \begin{theorem}
+        以下の条件を満たす全順序は $\langle \mathbb{R}, < \rangle$ と順序同型である。
+        \begin{enumerate}[(i)]
+            \item 境界を持たない
+            \item 連結
+            \item 可分
+        \end{enumerate}
+    \end{theorem}
+    
+    \vspace{1.5ex}
+    Suslinの仮説(SH)を導入するには、可算鎖条件(c.c.c.)を定義しておかなければならない。
+    \begin{definition*}
+        位相空間 $X$ が可算鎖条件を満たすとは、$X$ の互いに交わらない非空開集合の族が高々可算であることをいう。
+    \end{definition*}
+    
+    \begin{proposition}
+        可分ならば c.c.c. を満たす。
+    \end{proposition}
+    \begin{proof}
+        $D$ が稠密集合であるとする。もし $\{U_\alpha : \alpha < \omega_1\}$ が互いに交わらない非空集合であるなら、$U_\alpha \subset D$ から一点 $x_\alpha$ を選ぶと、${x_\alpha : \alpha < \omega_1}$ は $D$ の部分集合であり、濃度は $\omega_1$ である。
+    \end{proof}
+    
+    \begin{definition*} (SH)\\
+        Suslinの仮説(SH)とは、以下の言明である:\\
+        以下の条件を満たす全順序は $\langle \mathbb{R}, < \rangle$ と順序同型である。
+        \begin{enumerate}[(i)]
+            \item 境界を持たない
+            \item 連結
+            \item c.c.c. を満たす
+        \end{enumerate}
+        言い換えると、「境界を持たない連結な全順序で、c.c.c. を満たすが可分でないようなものは存在しない 」
+    \end{definition*}
+    
+    \newpage
+    \section{Suslin線}
+    SH における境界がないことと連結であるという条件を更に緩めたものをSuslin線と呼ぶ。
+    
+    \begin{definition*}
+        Suslin線とは、可分だが c.c.c. を満たさないような全順序のことである。
+    \end{definition*}
+    
+    これは任意の基数に対して一般化できる。すなわち、
+
+    \begin{definition*}
+        $\kappa$ を基数とする。\\
+        位相空間 $X$ が $\kappa$-可分であるとは、濃度が $\kappa$ 未満の稠密な部分集合が存在することをいう。\\
+        位相空間 $X$ が $\kappa$-鎖条件($\kappa$-c.c.)を満たすとは、$X$ の任意の互いに交わらない非空開集合の族の濃度が $\kappa$ 未満になることをいう。\\
+        全順序 $X$ が $\kappa$-Suslin線であるとは、$\kappa$-c.c. を満たすが $\kappa$-可分でないことをいう。
+    \end{definition*}
+    
+    先程定義したSuslin線は $\omega_1$-Suslin線のことである。
+    
+    \begin{proposition}
+        $\kappa$ が正則基数で、$\kappa$-Susulin線が存在するとき、以下の条件を満たす $\kappa$-Suslin線が存在する。
+        \begin{enumerate}[(i)]
+            \item 自己稠密
+            \item 任意の開区間は $\kappa$-可分でない。
+        \end{enumerate}
+    \end{proposition}
+    \begin{proof}
+        $Y$ を $\kappa$-Susulin線 とする。$Y$ 上の同値関係 $x \sim y$ を、$x, y$ の間の開区間が $\kappa$-可分である、と定義する。\\
+        $X = Y/\sim$ として、$X$ 上の全順序 $I \lhd J$ を、\\
+        $I$ のある元(すなわち全ての元) $x$ と $J$ のある元(すなわち全ての元) が $x < y$ となる\\
+        と定義する。\\
+        $I \in X, \ x, y \in I, \ x<y$ のとき $(x, y) \subseteq I$ であることに注意する。\\
+        $I \in X$ は $\kappa$-可分であることを示す。そのために、$\mathcal{M} = \{ (x_\alpha, y_\alpha) \subseteq I : \alpha < \lambda\}$ を、互いに交わりのない非空開集合の族のうち極大なものとする。$\kappa$-c.c. より $\lambda < \kappa$ である。各 $\alpha < \lambda$ に対して、稠密な $D_\alpha \in (x_\alpha, y_\alpha), \ |D_\alpha| < \kappa$ を選び、$D = \bigcup D_\alpha$ とする。$\kappa$ は正則だから、$|D| < \kappa$. $I$ に含まれる任意の非空開区間 $(x, y)$ について、$\mathcal{M}$ の極大性より何らかの $(x_\alpha, y_\alpha)$ と交わるので、$D_\alpha$ と交わる。$I$ が最大元や最小元をもつなら、$D$ にそれを付け加えることで $I$ の稠密な部分集合で濃度が $\kappa$ 未満なものを得る。\\
+        (i) を示す。$I \lhd J, \ (I, J) = \emptyset$ とすると、$x \in I, \ y \in J$ を取ったとき $(x, y) \subseteq I \cup J$ であり、$I, J$ は $\kappa$-可分だから $(x, y)$ も $\kappa$-可分 となってしまい、$x \sim y$ となり矛盾する。\\
+        (ii) を示す。$(I, J)$ の部分集合 $\{K_\alpha : \alpha < \lambda\} \ (\lambda < \kappa)$ が稠密であったとする。各 $\alpha < \lambda$ に対して稠密な $D_\alpha \subseteq K_\alpha, \ |D_\alpha| < \kappa$ を選ぶ。$D = \bigcup D_\alpha$ とおく。\\
+        $\mathcal{M} = \{(x_\beta, y_\beta) \subseteq Y : \beta < \mu\}$ を、ある $L \in [I, J]$ に含まれるような互いに交わりのない非空開集合のうち極大なものとする。$Y$ は $\kappa$-c.c. を満たすから、$\mu < \kappa$ である。各 $\beta < \mu$ に対して、$E_\beta \subseteq (x_\beta, y_\beta), \ |E_\beta| < \kappa$ を稠密な部分集合として、$E = \bigcup E_\beta$ とおく。$|E| < \kappa$ である。\\
+        $D\cup E$ は $Z = \bigcup \{L \in [I, J]\}$ の稠密な部分集合である。実際、$\emptyset \subsetneq (a, b) \subseteq Z$ のとき、$a, b$ の同値類 $A, B$ は $I \leq A, B \leq J$ である。$A < B$ のとき、$(A, B) \neq \emptyset$ であり、ある $D_\alpha \in (A, B)$ があるから、$(a, b) \bigcap D_\alpha \neq \emptyset.$\\
+        $A = B$ のとき、$\mathcal{M}$ の極大性より、$(a, b)$ はある $(x_\beta, y_\beta)$ と交わる。したがって、$(a, b) \cap E_\beta \neq \emptyset.$\\
+        したがって、$D\cup E$ は $Z = \bigcup \{L \in X : L \in [I, J]\}$ の稠密な部分集合であり、濃度が $\kappa$ 未満となって、$I, J$ の点が同値となってしまう。矛盾。\\
+        最後に、$X$ が $\kappa$-c.c. を満たすことについて、もし $\{(I_\alpha, J_\alpha) : \alpha < \kappa\}$ が $X$ の互いに交わりのない非空開区間の族であるなら、$x_\alpha \in I_\alpha, \ y_\alpha \in J_\alpha$ を取って $\{(x_\alpha, y_\alpha) : \alpha < \kappa\}$ は $Y$ の互いに交わりのない非空開区間の族となって、矛盾。
+    \end{proof}
+    
+    \begin{theorem}
+        SH と ($\omega_1$-)Suslin線の不存在は同値である。
+    \end{theorem}
+    \begin{proof}
+        $\omega_1$-Suslin線が存在すると仮定しよう。前の命題より、自己稠密な $\omega_1$-Suslin線が存在する。この Suslin線から最大元や最小元があったら取り除くことで、境界がなく、かつ自己稠密であるような $\omega_1$-Suslin線 $X$ が存在する。$X$ の Dedekind 切断による完備化 $C$ を考える。この $C$ が再び $\omega_1$-Suslin線になることを示せば良い。\\
+        つまり、$X$ が境界を持たない自己稠密な全順序で $\pi : X \rightarrow C$ が $X$ の Dedekind 切断による完備化であるとき、$X$ c.c.c. を満たすならば $C$ も c.c.c. を満たし、$C$ が可分なら $X$ も可分であることを示せば良い。\\
+        $C$ が c.c.c. を満たすことについて、$\{(A_\alpha, B_\alpha) \subseteq C : \alpha < \omega_1\}$ が互いに交わりのない非空開集合の族であるなら、$x_\alpha, y_\alpha \in X$ で $A_\alpha < \pi(x_\alpha) < \pi(y_\alpha) < B_\alpha$ となるものがある。このとき $\{(x_\alpha, y_\alpha) \subseteq X : \alpha < \omega_1\}$ は互いに交わりのない非空開集合族だから、矛盾。よって、$C$ は c.c.c. を満たす。\\
+        次に $D = \{A_k \in C : k \in \omega\}$ が $C$ 内で稠密であるとする。各 $k \in \omega$ に対して、点列 $a^k_n, \, b^k_n \, (k \leq n \in \omega)$ を、\\
+        $(\pi(a^k_n), \, \pi(b^k_n)) \cap \{A_0, \cdots, A_n\} = \{A_k\}$ となるように取る。\\
+        このとき、$E = \{a^k_n : k,n\in\omega, \ k \leq n\} \cup \{b^k_n : k,n\in\omega, \ k \leq n\}$ は $X$ の稠密な部分集合である。実際、X の開区間 $(x, y)$ について、$\pi(x) < A_k < \pi(y)$ となっていたとする。もし $(x, y)$ がどの $a^k_n, \, b^k_n \, (k \leq n \in \omega)$ も含まないとすると、$\pi(a^k_n) < A_k < \pi(b^k_n)$ かつ $\pi(x) < A_k < \pi(y)$ であるから、$a^k_n \leq x < y \leq b^k_n$ が全ての $n \geq k$ で成り立つ。したがって、$(\pi(x), \pi(y)) \cap \{ A_0, \cdots, A_n\} = \{A_k\}$ が全ての $n \geq k$ で成り立ち、$(\pi(x), \pi(y)) \cap D = \{A_k\}$ となって、矛盾である。
+    \end{proof}
+    
+    \newpage
+    \section{Suslin木}
+    
+    \section{参考文献}
+    \begin{enumerate}[]
+        \item Jech, T. [2006] {\it Set Theory} (Springer, Berlin)
+        \item Kunen, K. [1992] {\it Set Theory} (North Holland, Netherlands)
+    \end{enumerate}
+
+\end{document}
