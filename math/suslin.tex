@@ -47,7 +47,7 @@
     
     \vspace{0.5ex}
     
-    \begin{definition*}  全順序 $X$ の部分集合 $A$ が稠密であるとは、$a, b \in X, \ a < b$ のとき、$(a,b) \cap A \neq \emptyset$ となることをいう。特に $X$ が稠密であるとき、$X$ は自己稠密である、という。
+    \begin{definition*}  全順序 $X$ の部分集合 $A$ が稠密であるとは、$a, b \in X, \ a < b$ のとき、$(a,b) \cap A \neq set$ となることをいう。特に $X$ が稠密であるとき、$X$ は自己稠密である、という。
     \end{definition*}
     
     \begin{remark}
@@ -160,8 +160,8 @@
         \ \\
         逆に、$X$ が連結であるとしよう。$A\neq\emptyset$ を上に有界であると仮定して、$S$ を $A$ の上界全体とする。$x \not\in S$ のとき $a \in A$ で $x < a$ となるものが存在する。$x \in (-\infty, a) \subseteq X-S$ だから、$X-S$ は開集合である。\\
         もし $S$ が最小元を持たないなら、$x \in S$ のとき $x' < x$ となる $x' \in S$ が存在して、$x \in (x', \infty) \subseteq S$ であり $S$ は開集合となる。\\
-        $X$ の連結性より $S = \emptyset, X$ だが、$A$ は上に有界だから $S \neq \empty.$ しかし、$S = X$ のとき $X$ が境界を持たないことに矛盾してしまう。\\
-        よって $S$ は最小限を持つ。つまり、$A$ は上限を持つ。下に有界なときも同じ方法で下限を持つことが示せる。
+        $X$ の連結性より $S = \emptyset, X$ だが、$A$ は上に有界だから $S \neq \emptyset.$ しかし、$S = X$ のとき $X$ が境界を持たないことに矛盾してしまう。\\
+        よって $S$ は最小元を持つ。つまり、$A$ は上限を持つ。下に有界なときも同じ方法で下限を持つことが示せる。
     \end{proof}
     
     \vspace{0.5ex}
@@ -187,7 +187,7 @@
         可分ならば c.c.c. を満たす。
     \end{proposition}
     \begin{proof}
-        $D$ が稠密集合であるとする。もし $\{U_\alpha : \alpha < \omega_1\}$ が互いに交わらない非空集合であるなら、$U_\alpha \subset D$ から一点 $x_\alpha$ を選ぶと、${x_\alpha : \alpha < \omega_1}$ は $D$ の部分集合であり、濃度は $\omega_1$ である。
+        $D$ が稠密集合であるとする。もし $\{U_\alpha : \alpha < \omega_1\}$ が互いに交わらない非空集合であるなら、$U_\alpha \subset D$ から一点 $x_\alpha$ を選ぶと、$\{x_\alpha : \alpha < \omega_1\}$ は $D$ の部分集合であり、濃度は $\omega_1$ である。
     \end{proof}
     
     \begin{definition*} (SH)\\
@@ -257,6 +257,30 @@
     
     \newpage
     \section{Suslin木}
+    \begin{definition*} \ \\
+        半順序 $\langle T, \leq \rangle$ が木であるとは、任意の $x \in T$ に対して $\{y \in T : y < x\}$ が $<$ で整列順序であることをいう。\\
+        $x \in T$ に対して、高さ $\operatorname{ht}(x, T)$ とは、順序型 $\operatorname{type}\,(\{y \in T : y < x\}, <)$ のことである。\\
+        順序数 $\alpha$ に対して $T$ の $\alpha$-水準とは $\operatorname{Lev}_\alpha(T) = \{x \in T : \operatorname{ht}(x, T) = \alpha\}$ のことである。\\
+        $T$ の高さ $\operatorname{ht} T$ とは、$\operatorname{Lev}_\alpha(T) = \emptyset$ となる最小の $\alpha$ のことである。
+    \end{definition*}
+    \begin{example}
+        $I$ を任意の集合として $\displaystyle T = I^{<\alpha} = \bigcup_{\xi < \alpha} I^\xi$ を $\xi < \alpha$ から $I$ への写像全体とすると、$T$ には半順序として関数の拡張関係(すなわち包含関係)が入り、それは木構造になる。\\
+        この木の高さは $\alpha$ である。
+    \end{example}
+    
+    \vspace{0.5ex}
+    
+    \begin{definition*} \ \\
+        木 $T$ の鎖とは、部分集合 $C$ で $\forall x,y \in C \, (\,x \leq y \lor y \leq x\,)$ を満たすもの。つまり、任意の元が比較可能な部分集合、あるいは全順序部分集合のことである。\\
+        木 $T$ の反鎖とは、部分集合 $A$ で $\forall x,y \in A \, (\,x \leq y \rightarrow x = y\,)$ を満たすもの。つまり、任意の相異なる元が比較不能である部分集合のことである。
+    \end{definition*}
+    \begin{definition*} \ \\
+        基数 $\kappa$ に対して、木 $T$ が $\kappa$-木であるとは、高さが $\kappa$ であり $\forall \alpha < \kappa \, (|\operatorname{Lev}_\alpha(T)| < \kappa)$ が成立すること。\\
+        基数 $\kappa$ に対して、木 $T$ が $\kappa$-Suslin木であるとは、高さが $\kappa$ であり、任意の鎖と反鎖の濃度が $\kappa$ 未満となることをいう。
+    \end{definition*}
+    \begin{remark}
+        $\kappa$-Suslin木は$\kappa$-木である。なぜなら $\operatorname{Lev}_\alpha(T)$ は常に $T$ の反鎖であるからである。
+    \end{remark}
     
     \section{参考文献}
     \begin{enumerate}[]
