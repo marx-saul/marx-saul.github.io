@@ -1,0 +1,99 @@
+\documentclass{jsarticle}
+
+\usepackage{amsmath, amssymb, amsthm, amscd}
+%\usepackage{mathrsfs}
+\usepackage{enumerate}
+
+\theoremstyle{definition}
+\newtheorem*{axiom*}{公理}
+\newtheorem*{definition*}{定義}
+\newtheorem{theorem}{定理}
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{remark}{注}[section]
+\newtheorem*{remark*}{注}
+\newtheorem{example}{例}[section]
+\renewcommand\proofname{\rm [証明]}
+
+\parindent = 0pt
+
+\begin{document}
+    この pdf の目標は、被覆空間のホモトピー持ち上げ定理から、平面から二点を取り除いた空間の基本群 $\pi_1(\mathbb{C} - \{\pm1\})$ が非アーベル群であることを導くことである。
+    
+    \section*{準備}
+    \begin{definition*}
+        位相空間  $X$ の曲線とは、単位区間 $I = [0,1]$ から $X$ への連続写像のことをいう。
+    \end{definition*}
+    
+    \begin{definition*}
+        $p : Y \rightarrow X$ を位相空間の間の連続写像とする。連続写像 $f : Z \rightarrow X$ の($p$についての)持ち上げとは、連続写像 $\widetilde{f} : Z \rightarrow Y$ で $p\circ\widetilde{f} = f$ となるもののことである。
+    \end{definition*}
+    
+    \begin{definition*}
+        位相空間の間の連続写像 $p : Y \rightarrow X$ が局所同相であるとは、任意の $y \in Y$ に対しその開近傍 $V$ があって、$U = p(V)$ が $X$ の開集合で、かつ $p|V : V \rightarrow U$ が同相写像になることをいう。
+    \end{definition*}
+    
+    \vspace{2.0ex}
+    (端点固定の)ホモトピックな曲線は、(端点固定の)ホモトピックな曲線に持ち上がる。
+    \begin{theorem} (ホモトピーの持ち上げ) \ \\
+        $X, Y$ を Hausdorff 空間とし、連続写像 $p : Y \rightarrow X$ が局所同相であるとする。\\
+        $x_0, x_1 \in X, \, y_0 \in Y$ として、$p(y_0) = x_0$ であるとする。\\
+        連続写像 $F : I \times I \rightarrow X$ に対して、$f_s(t) = F(s, t)$ によって各 $s \in I$ に対し曲線 $f_s : I \rightarrow X$ を定める。\\
+        任意の $s \in I$ に対して $f_s(0) = x_0, \, f_s(1) = x_1$ であり、持ち上げ $\widetilde{f_s} : I \rightarrow Y$ で $\widetilde{f_s}(0) = y_0$ となるものが存在するなら、連続な $\widetilde{F} : I \times I \rightarrow X$ で、$\widetilde{F}(0, t) = \widetilde{f_0}(t), \ \widetilde{F}(1, t) = \widetilde{f_1}(t)$ となり、かつ任意の $s \in I$ に対して $\widetilde{F}(s, 1) = \widetilde{f_0}(1) = \widetilde{f_1}(1)$ となるものが存在する。
+    \end{theorem}
+    
+    \vspace{1.0ex}
+    
+    \begin{definition*}
+        $p : Y \rightarrow X$ を位相空間の間の連続写像とする。任意の曲線 $u : I \rightarrow X$ について、$u(0) = x, \, p(y) = x$ となっているとき、$p$ に関する $u$ の持ち上げ $\widetilde{u} : I \rightarrow Y$ で $\widetilde{u}(0) = y$ となるものが存在するとき、$p$ は curve lifting property を持つ、という。
+    \end{definition*}
+    
+    \begin{definition*}
+        位相空間 $X, Y$ と連続な写像 $p : Y \rightarrow X$ が被覆写像であるとは、任意の $x \in X$ に対しその開近傍 $U$ と、$Y$ の互いに交わりのない開集合 $V_i \ (i \in I)$ があって、$\displaystyle p^{-1}(U) = \bigcup_{i \in I} V_i$ かつ各 $i \in I$ に対し $p|V_i : V_i \rightarrow U$ が同相写像となることである。各 $V_i$ を sheet と呼ぶ。
+    \end{definition*}
+    
+    \begin{theorem}
+        被覆写像は curve lifting property を持つ。
+    \end{theorem}
+    
+    \section*{証明}
+    $\displaystyle Y = \mathbb{C} - \{k\pi + \frac{\pi}{2} : k \in \mathbb{Z}\}, \ X = \mathbb{C} - \{\pm1\}$ として、$\sin : Y \rightarrow X$ を考える。これは被覆写像であることを示そう。\\
+
+    $f : \mathbb{C} \rightarrow \mathbb{C}^{\times}, \, f(z) = e^{iz}$ 及び $\displaystyle g : \mathbb{C}-\{0, \pm i\} \rightarrow \mathbb{C} - \{\pm 1\}, \, g(z) = \frac{1}{2i}\left(z - \frac{1}{z}\right)$ は被覆写像である。したがって、$\displaystyle f^{-1}(\mathbb{C}-\{0, \pm i\}) = \mathbb{C} - \{k\pi +  \frac{\pi}{2} : k \in \mathbb{Z}\} = Y$ であり、$\sin = g \circ f|Y : Y \rightarrow X$ は被覆写像となる。これは、$g$ が二重被覆、すなわち sheet の枚数が2であることからしたがう。\\
+    
+    $D = \mathbb{C} - \{t \in \mathbb{R} : t \leq 0\}$ 上での対数の主値を $\log$ とする。つまり $-\pi < \operatorname{Im} \log z < \pi$ となるようにする。また、平方根を $\sqrt{z} = \exp(1/2 \log z)$ として $D$ 上で定義する。\\
+    
+    曲線 $u, v : I \rightarrow X, \ u(t) = 1 - e^{2\pi it}, \, v(t) = -u(t)$ を考える。それぞれ $1, -1$ を中心とする、$0$ を始点に持つ反時計回りの円周である。$u$ の $\sin$ に関する持ち上げを構成しよう。\\
+    
+    まず、$\displaystyle \frac{1}{2i}\left(w - \frac{1}{w}\right) = z$ を解くと、$w = iz \pm \sqrt{1 - z^2}$ となる。\\
+    
+    そこで、$\widetilde{u_1} : [0, \, 1/2) \rightarrow Y$ を $\displaystyle \widetilde{u_1}(t) = \frac{1}{i}\log \,(iu(t) + \sqrt{1 - u(t)^2})$ で定めることができる。実際、$0 < t < 1/2$ において $-\pi/2 < \arg u(t) < 0$ だから $0 < \arg \,(1-u(t)^2) < \pi$ であり、$0 < \arg \sqrt{1-u(t)^2} < \pi/2, \ 0 < \arg iu(t) < \pi/2$ ゆえ $\log$ の中身は負の実数あるいは0ではない。したがって $\widetilde{u_1}$ は $[0, \, 1/2)$ 上で連続な曲線を定め、$\sin \widetilde{u_1}(t) = u(t).$\\
+    次に、同じ方法で連続な曲線 $\widetilde{u_2} : (1/2, \, 1) \rightarrow Y$ を $\displaystyle \widetilde{u_2}(t) = \frac{1}{i}\log \,(iu(t) - \sqrt{1 - u(t)^2})$ で定めることができ、$\sin \widetilde{u_2}(t) = u(t).$\\
+    このとき、$$\displaystyle \lim_{t \to 1/2 - 0} \widetilde{u_1}(t) \,=\, \frac{1}{i}\log(2i + \sqrt{3}i) \,=\, \lim_{t \to 1/2 + 0} \widetilde{u_2}(t)$$ を見る。なぜなら、$t$ が小さい方から $1/2$ に近づくとき $1-u(t)^2$ の偏角は、0 から $\pi$ へ近づくから、$\sqrt{1-u(t)^2}$ は $\sqrt{3}i$ に近づく。$t$ が大さい方から $1/2$ に近づくとき $1-u(t)^2$ の偏角は、0 から $-\pi$ へ近づくから、$\sqrt{1-u(t)^2}$ は $-\sqrt{3}i$ に近づく。\\
+    最後に、$\displaystyle\lim_{t \to 1} \widetilde{u_2}(t) = \pi$ である。というのも、$t \to 1$ のとき、$iu(t)-\sqrt{1-u(t)^2}$ の偏角は $\pi$ へ(下から)近づくからである。\\
+    したがって、$\widetilde{u_1}, \widetilde{u_2}$ を適切に接続して、曲線 $\widetilde{u} : I \rightarrow Y$ で $\widetilde{u}(0) = 0,\, \widetilde{u}(1) = \pi, \, \sin \widetilde{u}(t) = u(t)$ となるものを構成することができる。\\
+    \ \\
+    $u \cdot v$ の持ち上げとして、
+    $w_1(t) = \left\{
+    \begin{array}{ll}
+    +\widetilde{u}(2t) & (0 \leq t \leq 1/2) \\
+    +\widetilde{u}(2t-1) + \pi & (1/2 \leq t \leq 1)
+    \end{array}
+    \right.$ が取れ、\\
+
+    $v \cdot u$ の持ち上げとして、
+    $w_2(t) = \left\{
+    \begin{array}{ll}
+    -\widetilde{u}(2t) & (0 \leq t \leq 1/2) \\
+    -\widetilde{u}(2t-1) - \pi & (1/2 \leq t \leq 1)
+    \end{array}
+    \right.$ が取れる。\\
+    $w_1(0) = w_2(0) = 0, \ w_1(1) = 2\pi, \, w_2(1) = -2\pi$ である。したがって、もし $u \cdot v$ と $v \cdot u$ がホモトピックであるなら、定理1 によりそれらの持ち上げである $w_1, w_2$ もホモトピックであるはずであり、特に $w_1(1) = w_2(1)$ とならなければならないが、これは矛盾である。
+    
+    \section*{参考文献}
+    \begin{enumerate}[]
+        \item Forster, O. [1981] {\it Lectures on Riemann Surfaces} (Springer, Berlin)
+    \end{enumerate}
+
+\end{document}
