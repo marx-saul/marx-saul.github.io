@@ -1,0 +1,143 @@
+\documentclass{article}
+
+\usepackage{amsmath, amssymb, amsthm, amscd}
+\usepackage{enumerate}
+
+\theoremstyle{theorem}
+\newtheorem*{definition*}{Definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}{Remark}[section]
+\newtheorem{example}{Example}[section]
+\renewcommand\proofname{\rm (Proof)}
+
+\parindent = 0pt
+
+\begin{document}
+    
+    \begin{definition*} (Henselian ring)
+        Let $(R, \mathfrak{m}, k)$ be a local ring. Hensel's lemma states that for any monic polynomials $F \in R[t]$ and $g, h \in k[t]$ such that $(g, h) = (1)$ and $\overline{F} = gh,$ there are monic polynomials $G, H \in R[t]$ such that $F = GH$ and $\overline{G} = g, \overline{H} = h$. If Hensel's lemma holds, we say that $R$ is Henselian. If in addition $k$ is separably closed, we say that $R$ is strictly Henselian.
+    \end{definition*}
+    
+    \begin{theorem}
+        Let $(R, \mathfrak{m}, k)$ be a local ring. Then the following conditions are equivalent:\\
+        {\rm (i)} $R$ is Henselian;\\
+        {\rm (i)'} for a monic polynomial $F(t) \in R[t]$ and an $x \in k$ such that $\overline{F}(x) = 0$ and $\overline{F'}(x) \neq 0,$ there is an $a \in R$ such that $\overline{a} = x$ and $F(a) = 0$;\\
+        {\rm (ii)} every finite $R$-algebra $A$ is a finite product of local rings;\\
+        {\rm (ii)'} {\rm (ii)} holds for $A = R[t]/(F(t))$ for a monic polynomial $F(t)$;\\
+        {\rm (iii)} for every finite $R$-algebra $A$, $A \rightarrow A/\mathfrak{m}A$ gives a bijection between idempotent elements;\\
+        {\rm (iii)'} {\rm (iii)} holds for $A = R[t]/(F(t))$ for a monic polynomial $F(t)$;\\
+        {\rm (iv)} for every etale morphism $X \rightarrow \operatorname{Spec} R$, the section of the closed fiber $X_s \rightarrow \operatorname{Spec} k$ can be lifted to a section of $X \rightarrow \operatorname{Spec} R$.
+    \end{theorem}
+    
+    \begin{remark}
+        If $R$ is a Henselian ring and $A$ is a finite $R$-algebra, then $A = \prod_{\mathfrak m} A_{\mathfrak m}$ where $\mathfrak m$ runs over (finitely many) maximal ideals of $A$.
+    \end{remark}
+    
+    \begin{theorem}
+        A complete local ring is Henselian.
+    \end{theorem}
+    
+    \begin{theorem}
+        Let $(R, \mathfrak{m}, k)$ be a local ring. Then the following conditions are equivalent:\\
+        {\rm (i)} $R$ is strictly Henselian;\\
+        {\rm (ii)} $R$ is Henselian and every finite etale scheme over $S = \operatorname{Spec} R$ is a finite disjoint union of copies of S;\\
+        {\rm (iii)} for every etale morphism $f : X \rightarrow S$ and a point $x \in X$ which is mapped to the closed point $s$ of $x$, there is a section of $f$ which maps $s$ to $x$.
+    \end{theorem} 
+    
+    \begin{definition*}
+        Let $A$, $A'$ be local rings and $\phi : A \rightarrow A'$ a local homomorphism. We say that $A'$ is essentially etale over $A$ if there is an etale $A$-algebra $B$ and a prime ideal $P$ of $B$ lying over the maximal ideal of $A$ such that $A'$ is isomorphic to $B_P$ over $A$. If in addition the homomorphism between the residue field is an isomporphism, we say that $A'$ is strictly essentially etale over $A$.
+    \end{definition*}
+    
+    \begin{theorem}
+        Compositions of essentially etale morphisms is again essentially etale.
+    \end{theorem}
+    \begin{proof}
+        Let $A \rightarrow A' \rightarrow A''$ be two essentially etale morphisms. There are etale $A$-algebra $B$, $A'$-algebra $B'$ and a prime ideal $P$ of $B$ lying over the maximal ideal of $A$, a prime ideal $P'$ of $B'$ lying over the maximal ideal of $A'$ such that $A'$ is isomorphic to $B_P$ over $A$, $A''$ is isomorphic to $B'_{P'}$.
+        
+        Since $\displaystyle B_P = \varinjlim_{f \not\in P} B_f$ and each $B_f$ has finitely presentation over $A$, by the "direct limit of schemes," there is an etale $B_f$-algebra $C$ such that $B' = C \otimes_{B_f} B_P$ over $B_f$ ($f \not\in P$).
+        
+        Replacing $B$ by $B_f$, we have etale morphisms $A \rightarrow B \rightarrow C$ such that $B_P = A'$ and $C_{P'} = A''$.
+    \end{proof}
+    
+    \begin{theorem}
+        Let $(A, \mathfrak{m}, k) \rightarrow (A', \mathfrak{m}', k')$ be an essentially etale homomorphism and let $(R, \mathfrak{n}, l)$ be a Henselian ring over $A$. Given a $k$-homomorphism $k' \rightarrow l$, this can be lifted to a unique $A$-homomorphism $A'\rightarrow R$.
+    \end{theorem}
+
+    \begin{theorem}
+        Let $(A, \mathfrak{m}, k)$ be a local ring and let $K/k$ be a field extension. Let $\mathcal{C}_K$ be the category whose objects are pairs $((A', \mathfrak{m'}, k'), \beta')$ of essentially etale $A$-algebra and a $k$-homomorphism $\beta:k' \rightarrow K$ and whose morphisms $((A', \mathfrak{m'}, k'), \beta') \rightarrow ((A'', \mathfrak{m''}, k''), \beta'')$ are local $A$-homomorphisms $\phi : A' \rightarrow A''$ such that $\beta'' \overline{\phi} = \beta'$ where $\overline\phi : k' \rightarrow k''$ is induced from $\phi$.
+        
+        Then $\mathcal{C}$ is a directed category, i.e.,\\
+        {\rm (i)} for any two objects $\lambda$ and $\mu$, there is an object $\nu$ together with morphisms $\lambda \rightarrow \nu$ and $\mu \rightarrow \nu$;\\
+        {\rm (ii)} for any objects $\lambda$ and $\mu$, there exist at most one morphism $\lambda \rightarrow \mu$.
+    \end{theorem}
+    
+    \begin{definition*}
+        Let $(A, \mathfrak{m}, k)$ be a local ring and let $K/k$ be a separable field extension. We write
+        $$A^K = \varinjlim_{A' \in \mathcal{C}_K} A'.$$
+        We define the Henselization to be $A^h = A^k$ and the strict Henselization to be $A^{hs} = A^{k^{\rm sep}}$.
+    \end{definition*}
+    
+    \begin{remark}
+        If $A'$ is an essentially etale $A$-algebra and $\alpha : k(A') \rightarrow K$ is a $k(A)$-homomorphism, there is an $A$-homomorphism $A' \rightarrow A^K$ which lifts $\alpha$.
+    \end{remark}
+    
+    \begin{theorem}
+        Let $(A_\lambda, \phi_{\lambda \mu})$ be a directed system of local rings $(A_\lambda, \mathfrak{m}_\lambda, k_\lambda)$ and local homomorphisms $\phi_{\lambda \mu} : A_\lambda \rightarrow A_\mu$. Let $A = \varinjlim_{\lambda} A_\lambda$. Then: \\
+        {\rm (i)} $A$ is a local ring with the maximal ideal $\mathfrak = \varinjlim_{\lambda} \mathfrak{m}_\lambda$ and the residue filed $k = \varinjlim_{\lambda} k_\lambda$;\\
+        {\rm (ii)} if $A_\mu$ is flat over $A_\lambda$ for every $\mu \geq \lambda$, then $A$ is flat over $A_\lambda$;\\
+        {\rm (iii)} if $\mathfrak{m}_\mu = A_\lambda\mathfrak{m}_\lambda$ for every $\mu \geq \lambda$, then $\mathfrak{m} = A\mathfrak{m}_\lambda$;\\
+        {\rm (iv)} if {\rm (ii)} and {\rm (iii)} hold and $A_\lambda$ is Noetherian, then so is $A$.
+    \end{theorem}
+    
+    \begin{theorem}
+        Let $(A, \mathfrak{m}, k)$ be a local ring and let $K/k$ be a separable field extension. Then:\\
+        {\rm (i)} $A^K$ is a faithfully flat Henselian local ring over $A$ with the maximal ideal $A^K\mathfrak{m}$ and the residue field $K$;\\
+        {\rm (ii)} for a Henselian ring $(R, \mathfrak{n}, l)$ and a local homomorphism $f : A \rightarrow R$ and a homomorphism $\alpha : K \rightarrow l$ which agrees with $\overline f : k \rightarrow l$ on $k$, there is a unique local homomorphism $F : A^K \rightarrow R$ extending $f$ such that $\overline F = \alpha$; in particular $\operatorname{Aut}(A^K/A) = \operatorname{Gal}(K/k)$; note that $\Box^K$ defines a functor on the category local rings and local homomorphisms;\\
+        {\rm (iii)} if $A$ is Noetherian, then so is $A^K$;\\
+        {\rm (iv)} $A^h \simeq \widehat{A^h}$;\\
+        {\rm (v)?} for a deirected system of local rings and local homomorphisms $(R_\lambda)$, we have $(\varinjlim_{\lambda} R_\lambda)^K \simeq \varinjlim_{\lambda} R_\lambda^K$;
+    \end{theorem}
+    
+    \begin{proof}
+        (i): Let $f : X \rightarrow S = \operatorname{Spec} A^K$ be an etale morphism and let $s \in S$ be the closed point and let $g: \operatorname{Spec} K \rightarrow X_s$ be a section of the closed fiber $f_s$. Shrinking $X$ and using direct limit descent, we may assume that there is an etale morphism $f' : X' \rightarrow S' = \operatorname{Spec} A'$ for an $A' \in \mathcal{C}_K$ such that $f$ is the base change of $f'$ to $S$. We may assume that $X' = \operatorname{Spec} B'$ is affine. Set $B = B' \otimes_{A'} A^K$ and $X = \operatorname{Spec} B$. Consider $\operatorname{Spec} K \xrightarrow{g} X_s \rightarrow X \rightarrow X'$. Let $x = g(s)$ and $x' \in X'$ be the image of $s$ to $X'$. Then this corresponds to a $k(A)$-homomorphism $\alpha : k(P') \rightarrow K$.
+        Therefore we have a $A$-homomorphism $\phi : B'_{P'} \rightarrow A^K$ such that $\overline\phi = \alpha$. This gives a morphism $S \rightarrow X'$ and consider the graph $\Gamma : S \rightarrow X' \times_{S'} S = X$. This is a section of $f$. This agrees with $g_s$ on the closed fiber. $\Gamma$ brings $s$ to the point of $X$ over $x'$ and $s$; it induces a homomorphism $\Gamma^\sharp : k(P')\otimes_{k(A')} K \rightarrow K$. $g$ also induces a homomorphism $g^\sharp : k(P')\otimes_{k(A')} K \rightarrow K$. By $\overline\phi = \alpha$, $\Gamma^\sharp = \alpha \times 1_K = g^\sharp$. Therefore $\Gamma(s) = g(s)$. The section of an etale morphism is determined by a single point, so $\Gamma = g.$\\
+        
+        (ii): It suffices to show that if $A \rightarrow A'$ is an essentially etale homomorphism, $R$ is a Henselian ring and $\alpha : k(A') \rightarrow k(R)$ is a $k(A)$-homomorphism, then there exists a unique $A$-homomorphism $\phi : A' \rightarrow R$ such that $\overline\phi = \alpha$.
+        
+        Let $A' = B_P$ for an etale $A$-algebra $B$ and a prime ideal $P$ over the maximal ideal of $A$. Consider $k(R)\otimes_A B \rightarrow k(R)\otimes_{k(A)}k(A') \rightarrow k(R)$ and the corresponding morphism $\operatorname{Spec} k(R) \rightarrow \operatorname{Spec} k(R)\otimes_A B$. This is a section of the closed fiber of the etale morphism $\operatorname{Spec} R\otimes_A B \rightarrow \operatorname{Spec} R$. Lifting to $\operatorname{Spec} R \rightarrow B$, we obtain a homomorphism $B \rightarrow R$. This gives the existence of $A' \rightarrow R$. To show the uniqueness, construct the section and use the fact that sections of etale morphisms is determined by a single point.\\
+        
+        (iv): Note that $A^K$ is faithfully flat over $A$.
+        
+        $\mathfrak{m}^{n}A^h / \mathfrak{m}^{n+1} A^h = \mathfrak{m}^{n} / \mathfrak{m}^{n+1} \otimes_A A^h = \mathfrak{m}^{n} / \mathfrak{m}^{n+1} \otimes_{A/\mathfrak{m}} A^h / \mathfrak{m}A^h = \mathfrak{m}^{n} / \mathfrak{m}^{n+1}.$
+        
+        Therefore $A^h / \mathfrak{m}^{n}A^h = A/\mathfrak{m}^{n}.$
+    \end{proof}
+    
+    \begin{corollary} Let $(A, \mathfrak{m}, k)$ be a local ring.\\
+        {\rm (i)} $A^{h(s)}$ is a faithfully flat Henselian local ring over $A$ with the maximal ideal $A^{h(s)}\mathfrak{m}$ and the residue field $k^{\rm(sep)}$;\\
+        {\rm (ii)} for a Henselian ring $R$, ${\rm loc.Hom}(A, R) \simeq {\rm loc.Hom}(A^h, R)$ and $\operatorname{Aut}(A^{hs}/A)$ is the absolute Galois group of $k$;\\
+        {\rm (ii)'} the functor $\Box^{h(s)}$ is the left adjoint to the inclusion of the full subcategory of (strict) Henselian rings into the category of local rings and local homomorphisms;\\
+        {\rm (ii)'} the functor $\Box^{h(s)}$ is the left adjoint to the inclusion of the full subcategory of (strict) Henselian rings into the category of local rings and local homomorphisms;
+    \end{corollary}
+    
+    \begin{theorem}
+        Let $R$ be a Henselian ring and let $S = \operatorname{Spec} R$.
+        for every etale morphism $X \rightarrow S$, the section of the closed fiber $X_s \rightarrow \operatorname{Spec} k$ can be lifted to a section of $X \rightarrow S$.
+    \end{theorem}
+    
+    \begin{theorem}
+        Let $A$ be a local ring, $B$ a finite $A$-algebra with maximal ideals $\mathfrak{n}_1, \cdots, \mathfrak{n}_k.$ Then $B \otimes_A A^h = (B_{\mathfrak{n}_1})^h \times \cdots \times (B_{\mathfrak{n}_k})^h$.
+    \end{theorem}
+    
+    \begin{theorem}
+        Let $A$ be a local ring, $B$ a finite $A$-algebra. Let $\mathfrak{n}'$ be a maximal ideal of $B' = B \otimes_A A^{hs}$. Then $\mathfrak{n} = \mathfrak{n}'\cap B$ is a maximal ideal of $B$ and $B'/\mathfrak{n}' = k(\mathfrak{n}')$ is a separable closure of $B/\mathfrak{n} = k(\mathfrak{n})$ and $B'_\mathfrak{n}$ is the strict Henselization of $B_\mathfrak{n}.$
+    \end{theorem}
+    
+    \section{References}
+    \begin{enumerate}[]
+        \item {[LF]} 
+    \end{enumerate}
+
+\end{document}

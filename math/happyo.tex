@@ -1,0 +1,25 @@
+\documentclass{jsarticle}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+
+\parindent = 0pt
+
+\begin{document}
+    
+    $P(x, y, z) = y^2z - x(x-z)(x-\lambda z)$ とする。ただし $\lambda \in \mathbb{C}$.
+    
+    \begin{align*}
+        \mathcal{H}_P & = \begin{pmatrix}
+            -6x + 2(\lambda + 1)z & 0 & 2(\lambda+1)x-2\lambda z\\
+            0 & 2z & 2y\\
+            2(\lambda+1)x-2\lambda z & 2y & 2\lambda x
+        \end{pmatrix}\\
+        & = 8(\lambda xz((\lambda+1)z-3x) - ((\lambda+1)x - \lambda z)^2z - ((\lambda+1)z-3x)y^2).
+    \end{align*}
+    
+    この式の $xy^2$ の項に着目して
+    $$(\mathcal{H}_P)_x(0,1,0) = 8 \times 3 = 24$$.
+    
+
+\end{document}

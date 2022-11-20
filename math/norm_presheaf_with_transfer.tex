@@ -1,0 +1,170 @@
+\documentclass{article}
+
+\usepackage{amsmath, amssymb, amsthm, amscd}
+\usepackage{enumerate}
+
+\theoremstyle{theorem}
+\newtheorem*{definition*}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem*{remark*}{Remark}
+\newtheorem{example}{Example}[section]
+\renewcommand\proofname{\rm (Proof)}
+
+\parindent = 0pt
+
+\begin{document}
+    In this pdf we provide a complete proof that the trace and norm sheaf $\mathcal O$ and $\mathcal O^\times$ are presheaves with transfer in the sense of [MVW].
+    
+    We will fix a base field $k$ throughout the entire argument. All schemes or rings that appear are supposed to be separated of finite type or finitely generated over $k$, respectively.\newline
+    
+    
+    The presheaf of global sections $\mathcal O$ and global invertible sections $\mathcal O^\times$ with transfer are defined by $\mathcal O(X) = \mathcal O_X(X), \ \mathcal O^\times(X) = \mathcal O_X^\times(X).$ for $X \in Sm/k$.
+    
+    For an elementary correspondence $V$ from $X$ to $Y$, which is an integral closed subscheme of $X \times Y$ finite surjective over $X$, we define $\mathcal O(V) : \mathcal O(X) \rightarrow \mathcal O(Y)$ and $\mathcal O^\times(V) : \mathcal O^\times(X) \rightarrow \mathcal O^\times(Y)$ by
+    
+    $$\mathcal O(Y) \rightarrow \mathcal O(V) \xrightarrow{\operatorname{Tr}} \mathcal O(X),$$
+    $$\mathcal O^\times(Y) \rightarrow \mathcal O^\times(V) \xrightarrow{N} \mathcal O^\times(X),$$
+    
+    respectively. Here $\operatorname{Tr}$ and $N$ are induced by the usual trace and norm maps $\operatorname{Tr}_{K(V)/K(X)} : K(V) \rightarrow K(X)$ and $N_{K(V)/K(X)} : K(V) \rightarrow K(X)$ of function fields. Note that $X$ is normal and $O(X)$ is integrally closed.
+    
+    This definition extends to all finite correspondences $Cor(X, Y)$ by linearity.
+    
+    We will show that this definition commutes with the composition of morphisms(finite correspondeces).\newline
+    
+    
+    From now on we only treat the case of norm $N$; similar arguments apply to the trace.
+    In order to prove that $O^\times$ commutes with the composition, we use the fact that if $L/K/F$ is a field tower, then $N_{L/F} = N_{K/F}N_{L/K}$. All the arguments and definition below are just technical ones.\newline
+    
+    \begin{definition*}
+        For a scheme $X$, let $X_1, \cdots, X_n$ be all the irreducible components of $X$. We define $K^\times(X) = \displaystyle \prod_{i} K^\times(X_i).$
+        
+        Let $\eta_i$ be the generic point of $X_i$, we define the local ring of $X$ along $X_i$ and the geometric multiplicity of $X$ along $X_i$ to be length of the artinian ring $\mathcal O_{X, X_i}$.
+    \end{definition*}
+    
+    \begin{definition*}
+    For a finite surjective morphism $f : X \rightarrow Y$, let $X_1, \cdots, X_n$ be all the irreducible components of $X$. Then $Y_i = f(X_i)$ is an irreducible component of $Y$.
+    
+    Let $N_i : K^\times(X_i) \rightarrow K^\times(Y_i)$ be $N_i(\alpha) = N_{K(X_i)/K(Y_i)}(\alpha)^e,$
+    
+    $e = l_{\mathcal O_{Y, Y_i}}(\mathcal O_{X, X_i}) / [K(X_i):K(Y_i)]$.
+    
+    $l_A(M)$ means the length of $M$ as an $A$-module.
+    
+    Define $N_{X/Y} = N_f : K^\times(X) \rightarrow K^\times(Y)$ by $K^\times(X_i) \xrightarrow{N_i} K^\times(Y_i) \rightarrow K^\times(Y).$
+    \end{definition*}
+
+    \begin{remark*}
+        $N_{id_X} = id_{K^\times(X)}.$
+    \end{remark*}
+    
+    \begin{remark*}
+        $l_{\mathcal O_{Y, Y_i}}(\mathcal O_{X, X_i}) / [K(X_i):K(Y_i)]$ is an integer. First note that $\mathcal O_{X, X_i}$ is a component of finite scheme $X \times_Y \operatorname{Spec} \mathcal O_{Y, Y_i},$ so $\mathcal O_{X, X_i}$ is finite over $\mathcal O_{Y, Y_i}$. Let $(A, \mathfrak m, K) \rightarrow (B, \mathfrak n, L)$ be a finite local homomorphism of artinian local rings.
+        
+        Then we have
+        $$l_A(B) = l_A(B/\mathfrak n) + l_A(\mathfrak n / \mathfrak n^2) + \cdots$$
+        and
+        $$l_A(\mathfrak n^s / \mathfrak n^{s+1}) = l_K(\mathfrak n^s / \mathfrak n^{s+1}) = [L:K]\,l_L(\mathfrak n^s / \mathfrak n^{s+1}).$$
+    \end{remark*}
+    
+    With this "extended" norm map, we have some convenient lemmas:
+    
+    \begin{lemma}
+        Let $V \subseteq X \times Y$ be a finite correspondence between smooth schemes $X, Y$, i.e., a closed subscheme finite surjective over $X$. Then the map $\mathcal O^\times(Y) \rightarrow \mathcal O^\times(V) \xrightarrow{N_{V/X}} \mathcal O^\times(X)$ is equal to the map $\mathcal O^\times([V]) : \mathcal O^\times(X) \rightarrow \mathcal O^\times(Y)$ defined by the finite correspondence $[V] = \sum n_iV_i$, where $V_i$ are irreducible components of $V$ and $n_i$ are the geometric multiplicities of $V$ along $V_i$.
+    \end{lemma}
+    
+    \begin{lemma}
+        Let $f : X \rightarrow Y$ and $g : Y \rightarrow Z$ be finite surjective morphisms. Then $N_{gf} = N_g N_f.$
+    \end{lemma}
+    \begin{proof}
+        Let $\{Z_i\}_i$ be all the irreducible components of $Z$, $\{Y_{i,j}\}_j$ all the irreducible components of $Y$ such that $g(Y_{i.j}) = Z_i$ and $\{X_{i,j,k}\}_k$ all the irreducible components of $Z$ such that $f(X_{i,j,k}) = Y_{i,j}.$
+        
+        $K^\times(Y) \xrightarrow{N_g} K^\times(Z)$ is given by $(\alpha_{i,j})_{i,j} \mapsto (\prod_j N_{K(Y_{i,j})/K(Z_i)}(\alpha_{i,j})^{e_{i,j}})_i$ and
+        
+        $K^\times(X) \xrightarrow{N_f} K^\times(Y)$ is given by $(\alpha_{i,j,k})_{i,j,k} \mapsto (\prod_k N_{K(X_{i,j,k})/K(Y_{i,j})}(\alpha_{i,j,k})^{e_{i,j,k}})_{i,j}$
+        
+        with $e_{i,j} = l_{\mathcal O_{Z, Z_i}}(\mathcal O_{Y, Y_{i,j}}) / [K(Y_{i,j}):K(Z_i)]$
+        
+        and $e_{i,j,k} = l_{\mathcal O_{Y, Y_{i,j}}}(\mathcal O_{X, X_{i,j,k}}) / [K(X_{i,j,k}):K(Y_{i,j})]$.
+        
+        By the fact that $N_{K(X_{i,j,k})/K(Y_{i,j})} N_{K(Y_{i,j})/K(Z_i)} = N_{K(X_{i,j,k})/K(Z_i)}$ and that $e_{i,j}e_{i,j,k} = l_{\mathcal O_{Z, Z_i}}(\mathcal O_{X, X_{i,j,k}}) / [K(X_{i,j,k}):K(Z_i)]$ we get the lemma.
+        
+    \end{proof}
+    
+    
+    For our purpose we need a "base change theorem". The preceding definition, however, is not suitable for this and we need an alternative definition of the norm map of schems.
+    
+    \begin{definition*}
+        Let $A$ be a ring and $M$ be an $A$-module free of finite rank. For an A-endomorphism $\phi : M \rightarrow M$, we define $Norm_A(\phi) = \det(\phi).$
+        
+        If $M = B$ is also an $A$-algebra, then for any $b \in B$, we define $Norm_A(b) = Norm_A(m_b)$ where $m_b : x \mapsto bx.$
+    \end{definition*}
+    
+    With this definition, the "base change theorem" is easy to see:
+    
+    \begin{lemma}
+        Let $B$ be an $A$-algebra, free of finite rank as an $A$-module and let $i : A \rightarrow A'$ be an $A$-algebra, and let $B' = B \otimes_A A'$. Then for any $b \in B$, $i(Norm_A(b)) = Norm_{A'}(b \otimes_A 1).$
+    \end{lemma}
+    
+    \begin{lemma}
+        Let $A$ be an integral domain, $B$ an $A$-algebra, free of finite rank as an $A$-module. Then $N_{B/A}(b) = Norm_A(b)$ for any $b \in B$.
+    \end{lemma}
+    \begin{proof}
+        Let $\mathfrak q_i \ (i = 1, \cdots, n)$ be all the minimal prime ideals of $B$. By the going-down theorem, each $\mathfrak q_i$ lies above the prime ideal $0$ of $A$.
+        
+        Let $B_i = B_{\mathfrak q_i}$ and $L_i$ be its residue field, and let $K$ be the quotient field of $A$.
+        
+        As $Norm$ commutes with base change and $N$ is local at the generic points, by replacing $A$ by $K$ and $B$ by $B \otimes_A K$, we may assume that $A = K$ and $B = B_1 \times \cdots \times B_n.$
+        
+        Now we can furthermore reduce to the case where $(B, \mathfrak q, L)$ is an artinian local ring. Then the theorem is straightforward: consider $\mathfrak q^s / \mathfrak q^{s+1}.$ The norm of the multiplication by $b$ on $\mathfrak q^s / \mathfrak q^{s+1}$ is $N_{L/K}(b)^{\dim_L \mathfrak q^s / \mathfrak q^{s+1}}$; therefore we have 
+        $$Norm_K(b) = N_{L/K}(b)^{\sum_s \dim_L \mathfrak q^s / \mathfrak q^{s+1}} = N_{B/A}(b)$$
+        since $\sum_s \dim_L \mathfrak q^s / \mathfrak q^{s+1} = l_K(B) / [L:K].$
+    \end{proof}
+    
+    \begin{corollary}
+        Let $f: T \rightarrow S$ be a finite morphism to a normal scheme, $S' \rightarrow S$ any morphism from an integral scheme, and $f' : T' = T \times_S S' \rightarrow S'$ the base change of $f$. Then the diagram below is commutative:
+        
+        $$\begin{CD}
+           K^\times(T') @>{N}>>               K^\times(S') \\
+                @AAA                             @AAA \\
+           \mathcal O^\times(T)  @>{N}>>  \mathcal O^\times(S)
+        \end{CD}$$
+    \end{corollary}
+    
+    
+    Let $X, Y, Z$ be smooth schemes, $V$ and $W$ be elementary correspondences between $X,Y$ and $Y,Z$, respectively. Consider the diagram
+    $$
+    \begin{CD}
+        \mathcal O^\times(Z) @>>> \mathcal O^\times(V\times_YZ)\\
+        @VVV @VVV\\
+        \mathcal O^\times(W) @>>> \mathcal O^\times(V\times_YW) @>>> K^\times(V\times_YW) @>{N}>> K^\times(X\times_YW)\\
+        @VNVV @VNVV @VNVV @VNVV\\
+        \mathcal O^\times(Y) @>>> K^\times(V) @= K^\times(V) @>N>> K^\times(X).
+    \end{CD}
+    $$
+    
+    The right-most square is commutative by Lemma 2. The left-most square on the row below is commutative by Lemma 3 and 4 (note that $Y, V$ and $W$ are integral).
+    
+    Now the composition $\mathcal O^\times(Z) \rightarrow \mathcal O^\times(Y) \rightarrow \mathcal O^\times(X)$ defined using finite correspondences $V$ and $W$ is equal to the map $\mathcal O^\times(Z) \rightarrow \mathcal O^\times(V\times_YW) \xrightarrow{N} \mathcal O^\times(X)$.
+    
+    Let $p : X \times Y \times Z \rightarrow X \times Z$ be the projection. $V \times_Y W$ is a closed subscheme of $X \times Y \times Z$. The composition of $V$ and $W$ in $Cor(-, -)$ is defined to be $p_*([V\times_Y W]) \in Cor(X, Z).$ The push-forward is defined in the way similar to intersection theory; in this case every irreducible component of $V\times_Y W$ is finite surjective over $X$, see [MVW] for more detail.
+    
+    Now , using Lemma 1, we are reduced to show the following lemma:
+    
+    \begin{lemma}
+        Let $p : C \rightarrow X \times Z$ a morphism from an integral scheme $C$ whose composition with the projection $X \times Z \rightarrow X$ is finite surjective. Then the map $\mathcal O^\times(Z) \rightarrow \mathcal O^\times(C) \xrightarrow{N_{K(C)/K(X)}} \mathcal O^\times(X)$ coincides with the map $\mathcal O^\times(p_*C) : \mathcal O^\times(Z) \rightarrow \mathcal O^\times(X)$ defined by the finite correspondence $p_*C = dp(C),\ d = [K(C) : K(p(C))]$.
+    \end{lemma}
+    \begin{proof}
+        For a $x \in K^\times(p(C))$ we have
+        $$N_{K(C)/K(X)}(x) = N_{K(D)/K(X)}N_{K(C)/K(D)}(x) = N_{K(D)/K(X)}(x)^d.$$
+    \end{proof}
+    
+    \section*{References}
+    \begin{enumerate}[]
+        \item {[MVW]} Mazza, Carlo; Voevodsky, Vladimir; Weibel, Charles (2006), Lecture notes on motivic cohomology, Clay Mathematics Monographs, 2, Providence, R.I.: American Mathematical Society.
+    \end{enumerate}
+
+\end{document} 
